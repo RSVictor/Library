@@ -1,6 +1,6 @@
 import './assets/bootstrap.min.css'
 import './assets/style.css'
-import './assets/styleLogin.css'
+
 
 import { createApp } from 'vue'
 import App from './App.vue'

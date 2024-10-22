@@ -35,7 +35,7 @@
 
 </template>
 
-<style>
+<style scoped>
 
 body {
     display: flex;

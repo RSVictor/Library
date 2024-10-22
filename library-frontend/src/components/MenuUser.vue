@@ -1,9 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
+// Usamos useRoute para acessar a rota atual
+const route = useRoute();
 </script>
 
-<template>
-    <header class="p-3">
+<template >
+    <header v-if="route.name !== 'login'"  class="p-3">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between">
           <!-- Logo ou Ícone -->
@@ -48,96 +51,4 @@ import { RouterLink, RouterView } from 'vue-router'
   
  
   
-  <style>
-  header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #93BFA7;
-    height: 138px;
-  }
-  
-  .nav-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000; /* Cor padrão do texto */
-  }
-  
-  .nav-link i {
-    margin-right: 3px; /* Espaçamento entre o ícone e o texto */
-  }
-  
-  .input-logo input {
-    width: 250px;
-    height: 41px;
-    border-radius: 5px;
-    background-color: white;
-    border: none;
-    padding: 10px;
-    text-decoration: none;
-    outline: none;
-    padding-right: 2.5rem; /* Espaço para o ícone */
-  }
-  
-  .input-logo button {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 0.1rem; /* Espaço do ícone da borda direita */
-    border: none;
-    background-color: white;
-    height: 39px;
-    border-radius: 0 10px;
-  }
-  
-  .titulo-logo i {
-    color: white;
-  }
-  
-  .input-logo {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    position: relative;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 933px;
-  }
-  
-  .circle {
-    font-size: 15px;
-    display: flex;
-    color: white;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-  }
-  
-  .circulos {
-    width: 933px;
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .bd-placeholder-img {
-    width: 140px; /* Largura fixa das imagens */
-    height: 140px; /* Altura fixa das imagens */
-    background-color: #777; /* Cor de fundo das imagens */
-  }
-  
-  .rounded-circle {
-    border-radius: 50%; /* Arredonda as imagens para se tornarem circulares */
-  }
-  </style>
   
