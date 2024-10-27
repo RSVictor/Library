@@ -1,11 +1,5 @@
-<script setup>
-import { RouterLink, RouterView, useRoute } from 'vue-router'
-
-// Usamos useRoute para acessar a rota atual
-const route = useRoute();
-</script>
 <template>
-    <div v-if="route.name !== 'login'" class="barra-verde mt-3">
+    <div  class="barra-verde mt-3">
       <p>Redes Sociais
         <i class="bi bi-facebook">
         </i><i class="bi bi-twitter-x"></i>

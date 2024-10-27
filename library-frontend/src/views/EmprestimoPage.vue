@@ -21,7 +21,7 @@
 
   <div class="descricao-emprestimo mt-3">
     <div class="card-emp">
-      <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\React.png" class="card-img-top mt-2" style="height: 170px;" alt="Java Guia do Programador">
+      <img src="#" class="card-img-top mt-2" style="height: 170px;" alt="Java Guia do Programador">
       <div>
         <h5 class="card-title mt-3">Java Guia do Programador</h5>
       </div>

@@ -3,10 +3,11 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 
 // Usamos useRoute para acessar a rota atual
 const route = useRoute();
+
 </script>
 
 <template >
-    <header v-if="route.name !== 'login'"  class="p-3">
+   <header v-if="route.name !== 'login'" class="menu">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between">
           <!-- Logo ou Ícone -->
@@ -18,7 +19,7 @@ const route = useRoute();
             <ul class="nav mb-2 mb-lg-0 d-flex align-items-center list-unstyled">
               <li class="nav-item">
                 <a href="/maisBuscados" class="nav-link px-2 text-black">
-                  <i class="bi bi-list"></i> Categoria
+                  <i class="bi bi-list"></i> Mais Buscados
                 </a>
               </li>
               <li class="nav-item">
@@ -38,7 +39,7 @@ const route = useRoute();
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/pagina-emprestimo" class="nav-link px-2 text-black">
+                <router-link to="/emprestimo" class="nav-link px-2 text-black">
                   <i class="bi bi-cart"></i> Carrinho
                 </router-link>
               </li>

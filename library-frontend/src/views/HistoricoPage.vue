@@ -32,7 +32,7 @@
 
     <div class="descricao-emprestimo mt-3">
       <div class="card-emp">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\introdu�ao � Python.png" class="card-img-top mt-2" style="height: 170px;" alt="Java Guia do Programador">
+        <img src="#" style="height: 170px;" alt="Java Guia do Programador">
         <div>
           <h5 class="card-title mt-3">Java Guia do Programador</h5>
         </div>
@@ -53,7 +53,7 @@
 
     <div class="descricao-emprestimo mt-3">
       <div class="card-emp">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Python.png" class="card-img-top mt-2" style="height: 170px;" alt="Use a Cabeça Python">
+        <img src="#" class="card-img-top mt-2" style="height: 170px;" alt="Use a Cabeça Python">
         <div>
           <h5 class="card-title mt-3">Use a Cabeça Python</h5>
         </div>
@@ -74,7 +74,7 @@
 
     <div class="descricao-emprestimo mt-3">
       <div class="card-emp">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\React.png" class="card-img-top mt-2" style="height: 170px;" alt="Programador Autodidata">
+        <img src="#" class="card-img-top mt-2" style="height: 170px;" alt="Programador Autodidata">
         <div>
           <h5 class="card-title mt-3">Programador Autodidata</h5>
         </div>
