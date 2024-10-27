@@ -1,45 +1,40 @@
 <template>
-    <main class="form-signin">
+  <main class="form-signin">
+    <div class="voltar">
+      <a href="/"><i class="bi bi-arrow-left"></i>Voltar</a>
+    </div>
 
-<div class="voltar">
-  <a href="/"><i class="bi bi-arrow-left"></i>Voltar</a>
-</div>
+    <form @submit.prevent="RegisterUser">
+      <div class="title">
+        <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
+      </div>
+      <div class="form">
+        <label for="floatingInput">Nome:</label>
+        <input type="text" v-model="username" class="form-control" id="floatingInput" placeholder="" />
+        
+      </div>
+      <div class="form">
+        <label for="floatingInput">Email:</label>
+        <input type="email" v-model="email" class="form-control" id="floatingInput" placeholder=""/>
+        
+      </div>
+      <div class="form">
+        <label for="floatingPassword">Senha:</label>
+        <input type="password" v-model="password" class="form-control" id="floatingPassword" placeholder=""/>
+        
+      </div>
+      <p v-if="message">{{ message }}</p>
 
-<form @submit.prevent="RegisterUser">
-  <div class="title">
-    <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
-  </div>
-  <div class="form">
-    <label for="floatingInput">Nome:</label>
-    <input type="text" v-model="username" class="form-control" id="floatingInput" placeholder="">
-
-  </div>
-  <div class="form">
-    <label for="floatingInput">Email:</label>
-    <input type="email" v-model="email" class="form-control" id="floatingInput" placeholder="">
-
-  </div>
-  <div class="form">
-    <label for="floatingPassword">Senha:</label>
-    <input type="password" v-model="password" class="form-control" id="floatingPassword" placeholder="">
-  </div>
-  <p v-if="message">{{ message }}</p>
-
-
-  <div class="button">
-    <button type="submit">Cadastrar</button>
-  </div>
-
-</form>
-
-
-</main>
+      <div class="button">
+        <button type="submit">Cadastrar</button>
+      </div>
+    </form>
+  </main>
 </template>
 
 <script>
 import { userService } from '../services/api'; // Verifique o caminho do axios
 import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
-import { RouterLink, RouterView } from 'vue-router';
 
 export default {
   data() {
@@ -47,15 +42,36 @@ export default {
       username: '',
       email: '',
       password: '',
-      message: ''
+      message: '',
+      hasError: false // Adiciona a variável para controlar erros
     };
   },
   methods: {
     async RegisterUser() {
+      this.hasError = false; // Reseta o estado de erro
+      // Verifica se todos os campos estão preenchidos
+      if (!this.username) {
+        this.message = 'O nome é obrigatório.';
+        this.hasError = true; // Define erro como verdadeiro
+      }
+      if (!this.email) {
+        this.message = 'O email é obrigatório.';
+        this.hasError = true;
+      }
+      if (!this.password) {
+        this.message = 'A senha é obrigatória.';
+        this.hasError = true;
+      }
+
+      // Se houver erro, não prossegue
+      if (this.hasError) {
+        return;
+      }
+
       try {
         const response = await userService.register({
           username: this.username,
-          email: this.email,  // Certifique-se de que este campo está presente
+          email: this.email,
           password: this.password,
         });
 

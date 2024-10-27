@@ -39,19 +39,21 @@ exports.login = async (req, res) => {
     try {
         // Busca usuário pelo email
         const user = await User.findOne({ email });
-        if (!user) return res.status(400).json(
-            { error: 'Usuário não encontrado' });
+        if (!user) return res.status(400).json({ error: 'Usuário não encontrado' });
 
         // Compara a senha fornecida com a senha armazenada
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({
-             error: 'Senha incorreta' });
+        if (!isMatch) return res.status(400).json({ error: 'Senha incorreta' });
 
         // Cria web token
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, 
-            { expiresIn: '1h' });
-       // res.json({ token });
-        res.status(200).json({message: "Login realizado"});
+        const token = jwt.sign({ id: user.id, permissions: user.permissions }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Retorna o token e as permissões
+        res.status(200).json({
+            message: 'Login realizado',
+            token,
+            permissions: user.permissions,
+        });
     } catch (error) {
         console.error(error); // Loga o erro
         res.status(500).json({ error: 'Erro ao fazer login' });
