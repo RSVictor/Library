@@ -16,7 +16,7 @@
           class="form-control"
           id="floatingInput"
           placeholder=""
-          required
+          
         />
       </div>
       <div class="form">
@@ -27,7 +27,7 @@
           class="form-control"
           id="floatingPassword"
           placeholder=""
-          required
+          
         />
       </div>
 
@@ -57,38 +57,23 @@ export default {
   },
   methods: {
     async loginUser() {
-      this.message = ''; // Reseta a mensagem antes da nova tentativa
-        // Verifica se os campos estão preenchidos
-    if (!this.email || !this.password) {
-       this.message = 'Email e senha são obrigatórios.';
-      return;
-    }
-      try {
+    try {
         const response = await userService.login({
-          email: this.email,
-          password: this.password,
+            email: this.email, // Deve ser um email válido
+            password: this.password // Deve ser a senha correta
         });
-        
-        const authStore = useAuthStore();
-        authStore.login(response.data.token, response.data.permissions);
 
+        console.log('Login bem-sucedido:', response);
         this.message = 'Login bem-sucedido!';
-        
-        // Redirecionar com base na permissão
-        if (response.data.permissions === 'Usuario') {
-          this.$router.push('/'); 
-        } else if (response.data.permissions === 'ADM') {
-          this.$router.push('/listalivro'); 
-        } else {
-          this.message = 'Permissão desconhecida!';
-        }
-      } catch (error) {
-        // Se o erro ocorrer, verifica a resposta
-        this.message = error.response && error.response.data && error.response.data.message
-          ? error.response.data.message
-          : 'Erro ao fazer o login.';
-      }
+        this.$router.push('/'); // Redireciona após login bem-sucedido
+    } catch (error) {
+        this.message = 
+            error.response && error.response.data && error.response.data.error
+                ? error.response.data.error
+                : 'Erro ao fazer o login.';
+        console.error('Erro ao fazer login:', error); // Loga o erro no console
     }
+  }
   }
 };
 </script>
