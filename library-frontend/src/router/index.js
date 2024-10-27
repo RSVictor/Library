@@ -71,6 +71,12 @@ const routes = [
     meta: { requiresAuth: true } // Protegida
   },
   {
+    path: '/PerfilUser',
+    name: 'PerfilUser',
+    component: () => import('../views/PerfilUser.vue'),
+   
+  },
+  {
     path: '/maisBuscados',
     name: 'maisBuscados',
     component: () => import('../views/MaisBuscadosPage.vue')

@@ -65,7 +65,7 @@ export default {
 
         console.log('Login bem-sucedido:', response);
         this.message = 'Login bem-sucedido!';
-        this.$router.push('/'); // Redireciona após login bem-sucedido
+        this.$router.push('/PerfilUser'); // Redireciona após login bem-sucedido
     } catch (error) {
         this.message = 
             error.response && error.response.data && error.response.data.error
