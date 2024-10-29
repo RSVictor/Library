@@ -6,7 +6,8 @@
           <a href="#" style="color: black;">
             <i class="bi bi-bell"></i>
           </a>
-          <a href="#" style="color: black; text-decoration: none; margin-left: 10px;" @click.prevent="logout">Sair?</a>
+          <button @click="Logout" class="button-sair">Sair?</button> 
+         
         </div>
       </div>
   
@@ -18,7 +19,7 @@
         <div class="dados mt-4">
           <div class="foto-botao">
             <div class="img-foto">
-              <img :src="userImage" alt="Foto do Usuário" style="width: 300px;">
+              <img src="#" alt="Foto do Usuário" style="width: 300px;">
             </div>
   
             <div class="button-foto mt-3">
@@ -43,7 +44,7 @@
               <label for="novaSenhaInput">Nova senha:</label>
               <input v-model="newPassword" type="password" class="form-control" id="novaSenhaInput" placeholder="Digite a nova senha">
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+           
           </form>
         </div>
   
@@ -54,11 +55,10 @@
               <span class="button-text">Excluir</span>
             </a>
           </div>
-          <div class="button-salvar">
-            <a href="#" class="button-link" @click.prevent="updateUser">
-              <i class="bi bi-check2-square"></i>
-              <span class="button-text">Salvar</span>
-            </a>
+          <div >
+            <button class="button-salvar" type="submit">Salvar</button>
+              <i class="bi bi-check2-square"></i>             
+            
           </div>
         </div>
       </div>
@@ -67,6 +67,7 @@
   
   <script>
   import { userService } from '../services/api'; // Ajuste o caminho conforme sua estrutura
+  import { useAuthStore } from '../stores/authStore'; // Ajuste o caminho
   
   export default {
     data() {
@@ -74,8 +75,9 @@
         username: '',
         email: '',
         password: '',
-      
-      
+        newPassword: '', // Adicione aqui
+        userImage: '',
+           
       };
     },
     methods: {
@@ -106,10 +108,12 @@
       async deleteUser() {
         // Implementar lógica para excluir o usuário
       },
-      logout() {
-        // Lógica de logout
-      }
-    },
+      async Logout() {
+        const authStore = useAuthStore();
+        authStore.logout(); // Chame o método com 'logout' em minúsculas
+        this.$router.push('/login'); // Redireciona após o logout
+},
+  },
     mounted() {
       this.fetchUserData(); // Chama a função ao montar o componente
     },

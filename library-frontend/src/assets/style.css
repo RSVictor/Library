@@ -193,28 +193,17 @@ i {
     font-size: 18px;
 }
 
-
-
-.offcanvas-custom {
-    align-items: center;
-
-
+.button-sair{
+    color: black; 
+    margin-left: 10px;
+    background-color: none;
+    border: none;
+    background-color: white;
+    
 }
 
-.card-offcanvas {
-    width: 219px;
-    height: 250px;
-}
 
-.card-offcanvas .card-img-top {
-    display: flex;
-    width: 180px;
-    height: 190px;
-    background-color: #93BFA7;
-    margin-left: auto;
-    margin-right: auto;
 
-}
 
 
 /*pagiana descriçao livros*/

@@ -4,7 +4,7 @@
     <p>Bem-vindo, Usuário!</p>
     <div class="notificacao">
       <a href="#" style="color: black;"><i class="bi bi-bell"></i></a>
-      <a href="#" style="color: black; text-decoration: none; margin-left: 10px;">Sair?</a>
+      <button @click="Logout" class="button-sair">Sair?</button> 
     </div>
   </div>
 
@@ -49,7 +49,7 @@
       <a href="/">Adicionar</a>
     </div>
     <div class="button-emp">
-      <a href="/adicionarlivro">Cancelar</a>
+      <a href="/">Cancelar</a>
     </div>
     <div class="button-emp">
       <a href="/historico">Confirmar</a>

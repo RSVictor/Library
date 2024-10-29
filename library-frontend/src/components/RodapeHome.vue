@@ -1,5 +1,5 @@
 <template>
-    <div  class="barra-verde mt-3">
+    <div   class="barra-verde mt-3">
       <p>Redes Sociais
         <i class="bi bi-facebook">
         </i><i class="bi bi-twitter-x"></i>

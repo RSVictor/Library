@@ -16,7 +16,7 @@ const routes = [
     path: '/favoritos',
     name: 'favoritos',
     component: () => import('../views/FavoritosPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/descricao',
@@ -27,7 +27,7 @@ const routes = [
     path: '/emprestimo',
     name: 'emprestimo',
     component: () => import('../views/EmprestimoPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/historico',
@@ -56,7 +56,7 @@ const routes = [
     path: '/listaUser',
     name: 'listaUser',
     component: () => import('../views/ListaUserPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/historicoADM',

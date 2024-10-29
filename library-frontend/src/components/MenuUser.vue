@@ -7,7 +7,7 @@ const route = useRoute();
 </script>
 
 <template >
-   <header v-if="route.name !== 'login'" class="menu">
+   <header v-if="route.name !== 'login'"class="menu">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between">
           <!-- Logo ou Ícone -->

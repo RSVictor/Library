@@ -53,6 +53,10 @@ export const userService = {
     login(credentials) {
         return apiClient.post('/auth/login', credentials); // Realiza login
     },
+    async getProfile() {
+        const response = await apiClient.get('/profile');
+        return response.data;
+      },
     register(userData) {
         return apiClient.post('/auth/register', userData); // Registra um novo usuário
     },
