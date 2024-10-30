@@ -17,22 +17,23 @@ const isNotAuthPage = computed(() => route.name !== 'login' && route.name !== 'c
         
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                   <li><a href="/" class="nav-link px-2 link-body-emphasis"><strong>Localivros</strong></a></li>
-                  <li><a href="/favoritos" class="nav-link px-2 link-body-emphasis">Favoritos</a></li>
-                  <li><a href="/maisBuscados" class="nav-link px-2 link-body-emphasis">Mais Buscados</a></li>
+                 
                  
                 </ul>
         
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                  <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                  <input type="search" class="form-control" placeholder="Procurar..." aria-label="Search">
                 </form>
         
                 <div class="dropdown text-end">
                   <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="#" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <img src="#" alt="" width="32" height="32" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="/PerfilUser">Minha Conta</a></li>
-                    <li><a class="dropdown-item" href="/historico">Historico</a></li>                    
+                    <li><a class="dropdown-item" href="/historico">Historico</a></li>  
+                    <li><a class="dropdown-item" href="/favoritos">Favoritos</a></li> 
+                    <li><a class="dropdown-item" href="/maisBuscados">Mais buscados</a></li>                   
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Logout</a></li>
                   </ul>
