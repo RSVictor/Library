@@ -1,89 +1,43 @@
 <template>
-  <main class="form-signin">
-    <div class="voltar">
-      <a href="/"><i class="bi bi-arrow-left"></i>Voltar</a>
-    </div>
-
-    <form @submit.prevent="RegisterUser">
-      <div class="title">
-        <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
-      </div>
-      <div class="form">
-        <label for="floatingInput">Nome:</label>
-        <input type="text" v-model="username" class="form-control" id="floatingInput" placeholder="" />
+  <main class="form-container w-100 m-auto">
+      <form>
         
-      </div>
-      <div class="form">
-        <label for="floatingInput">Email:</label>
-        <input type="email" v-model="email" class="form-control" id="floatingInput" placeholder=""/>
+        <h1 class="h3 mb-3 fw-normal">Cadastrar</h1>
         
-      </div>
-      <div class="form">
-        <label for="floatingPassword">Senha:</label>
-        <input type="password" v-model="password" class="form-control" id="floatingPassword" placeholder=""/>
+        <div class="form-floating">
+            <input type="name" class="form-control " id="floatingInput" placeholder="Nome">
+            <label for="floatingInput">Nome</label>
+          </div>
+        <div class="form-floating mt-2">
+          <input type="email" class="form-control " id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Senha</label>
+        </div>
+    
         
-      </div>
-      <p v-if="message">{{ message }}</p>
-
-      <div class="button">
-        <button type="submit">Cadastrar</button>
-      </div>
-    </form>
-  </main>
+        <button class="btn text-bg-success w-100 mt-2 py-2" type="submit">Cadastrar</button>
+       
+      </form>
+    </main>
 </template>
 
-<script>
-import { userService } from '../services/api'; // Verifique o caminho do axios
-import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
 
-export default {
-  data() {
-    return {
-      username: '',
-      email: '',
-      password: '',
-      message: '',
-      hasError: false // Adiciona a variável para controlar erros
-    };
-  },
-  methods: {
-    async RegisterUser() {
-      this.hasError = false; // Reseta o estado de erro
-      // Verifica se todos os campos estão preenchidos
-      if (!this.username) {
-        this.message = 'O nome é obrigatório.';
-        this.hasError = true; // Define erro como verdadeiro
-      }
-      if (!this.email) {
-        this.message = 'O email é obrigatório.';
-        this.hasError = true;
-      }
-      if (!this.password) {
-        this.message = 'A senha é obrigatória.';
-        this.hasError = true;
-      }
 
-      // Se houver erro, não prossegue
-      if (this.hasError) {
-        return;
-      }
 
-      try {
-        const response = await userService.register({
-          username: this.username,
-          email: this.email,
-          password: this.password,
-        });
+<style scoped>
+.form-container{
+  
+  width: 100%;
+}
+html, body, main {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
 
-        this.message = 'Cadastro realizado com sucesso!';
-        this.$router.push('/login'); // Redirecionar após o cadastro
-      } catch (error) {
-        console.error('Erro ao cadastrar:', error);
-        this.message = error.response && error.response.data && error.response.data.error
-          ? error.response.data.error
-          : 'Erro ao fazer o cadastro.';
-      }
-    }
-  }
-};
-</script>
+</style>

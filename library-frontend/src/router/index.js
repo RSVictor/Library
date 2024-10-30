@@ -33,7 +33,7 @@ const routes = [
     path: '/historico',
     name: 'historico',
     component: () => import('../views/HistoricoPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+   
   },
   {
     path: '/cadastro',
@@ -44,13 +44,13 @@ const routes = [
     path: '/adicionarLivro',
     name: 'adicionarLivro',
     component: () => import('../views/AdicionarLivrosPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+   
   },
   {
     path: '/listalivro',
     name: 'listalivro',
     component: () => import('../views/ListaLivrosPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/listaUser',
@@ -62,13 +62,13 @@ const routes = [
     path: '/historicoADM',
     name: 'historicoADM',
     component: () => import('../views/HistoricoPage.vue'), // Ajuste para o componente correto
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/PerfilVistaADM',
     name: 'PerfilVistaADM',
     component: () => import('../views/PerfilVistaAdmPage.vue'),
-    meta: { requiresAuth: true } // Protegida
+    
   },
   {
     path: '/PerfilUser',

@@ -4,7 +4,7 @@
       <p>Bem vindo, Usuario!</p>
       <div class="notificacao">
         <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>
-        <button @click="Logout" class="button-sair">Sair?</button> 
+        <button @click="logout" class="button-sair">Sair?</button> 
       </div>
     </div>
 

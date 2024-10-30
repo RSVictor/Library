@@ -1,11 +1,10 @@
 <template>
-    <div class="container">
+   <div class="container">
         <div class="user">
-            <p>Bem vindo, Usuario!</p>
-            <div class="notificacao">
-                <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>
-                <button @click="Logout" class="button-sair">Sair?</button> 
-            </div>
+          <p>Bem vindo, Usuario!</p>
+          <div class="notificacao">
+            <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>            
+          </div>
         </div>
 
         <div class="titulo-emp ">
@@ -20,7 +19,7 @@
                 <div class="dados  mt-2">
                     <div class="foto-botao">
                         <div class="img-foto">
-                            <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\person.png" alt="" style="width: 300px;">
+                            <img src="img/person.png" alt="" style="width: 300px;">
 
                         </div>
 
@@ -68,13 +67,13 @@
 
                 <div class="button-perfil-user mt-5">
                     <div class="button-adicionar">
-                        <a href="/adicionarLivro" class="button-link">
+                        <a href="adicionarLivros.html" class="button-link">
                             <i class="bi bi-plus-lg"></i>
                             <span class="button-text">Novo</span>
                         </a>
                     </div>
                     <div class="button-salvar">
-                      <a href="/listalivro" class="button-link">
+                      <a href="perfil.html" class="button-link">
                         <i class="bi bi-check2-square"></i>
                         <span class="button-text">Salvar</span>
                       </a>

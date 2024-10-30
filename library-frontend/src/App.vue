@@ -9,7 +9,7 @@ import login from './views/LoginPage.vue';
 <template>
   <header>
     <Menu />
-    <MenuLogado />
+   
   </header>
   
   <RouterView />
