@@ -27,7 +27,7 @@
       <div class="col-3">
         <div class="card mt-3">
           <a href="/descricao">
-            <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Programador Autodidata.png" class="card-img-top mt-2" alt="Programador Autodidata">
+            <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
           </a>
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
@@ -122,54 +122,10 @@
           </div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="PHP & MySQL">
-          <div class="card-body">
-            <h5 class="card-title">PHP & MySQL</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Fundamentos de Programação">
-          <div class="card-body">
-            <h5 class="card-title">Fundamentos de Programação</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Fundamentos de Programação">
-          <div class="card-body">
-            <h5 class="card-title">Fundamentos de Programação</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Fundamentos de Programação">
-          <div class="card-body">
-            <h5 class="card-title">Fundamentos de Programação</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+     
+    
+      
+    
     </div>
   </div>
 </template>

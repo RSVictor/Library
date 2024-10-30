@@ -15,7 +15,7 @@
 
     <div class="mais-Buscados mb-5">
       <div class="card-fav mt-5">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Python.png" class="card-img-top mt-2" alt="...">
+        <img src="#" class="card-img-top mt-2" alt="...">
         <div class="card-body mt-4">
           <h5 class="card-title">Java guia do Programador</h5>
 
@@ -24,7 +24,7 @@
       </div>
 
       <div class="card-fav mt-5">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Python.png" class="card-img-top mt-2" alt="...">
+        <img src="#" class="card-img-top mt-2" alt="...">
         <div class="card-body mt-4">
           <h5 class="card-title">Java guia do Programador</h5>
 
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="card-fav mt-5">
-        <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Python.png" class="card-img-top mt-2" alt="...">
+        <img src="#" class="card-img-top mt-2" alt="...">
         <div class="card-body mt-4">
           <h5 class="card-title">Java guia do Programador</h5>
 
