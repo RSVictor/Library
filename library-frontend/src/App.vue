@@ -2,9 +2,8 @@
 import { onMounted } from 'vue';
 import { useAuthStore } from './stores/authStore'; // ajuste o caminho se necessário
 import { RouterView } from 'vue-router';
-import Menu from './components/MenuUser.vue';
+import MenuUser from './components/MenuUser.vue';
 import Rodape from './components/RodapeHome.vue';
-import login from './views/LoginPage.vue';
 import MenuDeslogado from './components/MenuDeslogado.vue';
 import MenuAdm from './components/MenuAdm.vue';
 
@@ -20,7 +19,7 @@ onMounted(() => {
 <template>
    <header>
     <component 
-      :is="authStore.isLoggedIn ? (authStore.userPermission === 'ADM' ? MenuADM : MenuUsuario) : MenuDeslogado" />
+      :is="authStore.isLoggedIn ? (authStore.userPermission === 'ADM' ? MenuADM : MenuUser) : MenuDeslogado" />
   </header>
 
   

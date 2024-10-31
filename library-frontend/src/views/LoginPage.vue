@@ -30,43 +30,48 @@
 </template>
 
 <script>
-import { userService } from '../services/api';
-import { useAuthStore } from '../stores/authStore';
+import { userService } from '../services/api'; // Verifique o caminho do axios
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { RouterLink, RouterView } from 'vue-router'
 
 export default {
   data() {
     return {
       email: '',
       password: '',
-      message: '',
+      message: ''
     };
   },
   methods: {
     async loginUser() {
-      // Verifica se os campos estão vazios
-      if (!this.email || !this.password) {
-        this.message = 'Por favor, preencha todos os campos.';
-        return; // Para a execução aqui se algum campo estiver vazio
-      }
-
       try {
         const response = await userService.login({
           email: this.email,
           password: this.password,
         });
 
-        console.log('Login bem-sucedido:', response);
+        const authStore = useAuthStore();
+        // Chama o método de login da loja
+        authStore.login(response.data.token, response.data.permissions);
+
         this.message = 'Login bem-sucedido!';
-        this.$router.push('/'); // Redireciona após login bem-sucedido
+
+        // Redirecionar com base na permissão
+        if (response.data.permissions === 'Usuario') {
+          this.$router.push('/PerfilUser'); // Redireciona para a página do usuário
+        } else if (response.data.permissions === 'ADM') {
+          this.$router.push('/listalivro'); // Redireciona para a página de administrador
+        } else {
+          this.message = 'Permissão desconhecida!';
+        }
       } catch (error) {
-        this.message =
-          error.response && error.response.data && error.response.data.error
-            ? error.response.data.error
-            : 'Erro ao fazer o login.';
-        console.error('Erro ao fazer login:', error); // Loga o erro no console
+        this.message = 
+          error.response && error.response.data && error.response.data.message
+            ? error.response.data.message
+            : 'Erro ao fazer login.';
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
