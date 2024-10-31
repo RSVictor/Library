@@ -1,16 +1,28 @@
 <script setup>
+import { onMounted } from 'vue';
+import { useAuthStore } from './stores/authStore'; // ajuste o caminho se necessário
 import { RouterView } from 'vue-router';
 import Menu from './components/MenuUser.vue';
 import Rodape from './components/RodapeHome.vue';
 import login from './views/LoginPage.vue';
+import MenuDeslogado from './components/MenuDeslogado.vue';
+import MenuAdm from './components/MenuAdm.vue';
+
+const authStore = useAuthStore();
+
+// Verifica o estado de autenticação na montagem
+onMounted(() => {
+  authStore.checkAuthStatus();
+});
 
 </script>
 
 <template>
-  <header>
-    <Menu />
-   
+   <header>
+    <component 
+      :is="authStore.isLoggedIn ? (authStore.userPermission === 'ADM' ? MenuADM : MenuUsuario) : MenuDeslogado" />
   </header>
+
   
   <RouterView />
   <Rodape />

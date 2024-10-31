@@ -25,7 +25,7 @@
   
         <div class="container desc p-4 mt-3">
           <div class="card" style="width: 15rem;">
-            <img src="C:\Users\Victor\Desktop\Biblioteca_Victor\library-frontend\src\assets\img\Programador pragmatico.png" class="card-img-top" alt="Código Limpo" style="width: 100%; height: 100%;">
+            <img src="#" class="card-img-top" alt="Código Limpo" style="width: 100%; height: 100%;">
             <a href="/emprestimo" class="btn btn-primary mt-3" style="background-color: #335844;">Emprestar</a>
           </div>
   
@@ -68,6 +68,7 @@
             <li class="list-group-item lista">A second item</li>
             <li class="list-group-item lista">A third item</li>
             <li class="list-group-item lista">A fourth item</li>
+            <li class="list-group-item lista">And a fifth one</li>
             <li class="list-group-item lista">And a fifth one</li>
           </ul>
         </div>

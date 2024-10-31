@@ -1,7 +1,5 @@
-
-
 <template>
-    <header  class="p-3 mb-4 border-bottom w-100 p-3" style="background-color: #93BFA7;">
+    <header v-if="isNotAuthPage" class="p-3 mb-4 border-bottom w-100 p-3" style="background-color: #93BFA7;">
             <div class="container-fluid">
               <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
@@ -21,12 +19,12 @@
                     <img src="#" alt="" width="32" height="32" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="/PerfilUser">Minha Conta</a></li>
-                    <li><a class="dropdown-item" href="/historico">Historico</a></li>  
-                    <li><a class="dropdown-item" href="/favoritos">Favoritos</a></li> 
+                    <li><a class="dropdown-item" href="/listalivro">Livros</a></li>
+                    <li><a class="dropdown-item" href="/adicionarLivro">Adicionar livro</a></li>  
+                    <li><a class="dropdown-item" href="/listaUser">Usuários</a></li> 
                     <li><a class="dropdown-item" href="/maisBuscados">Mais buscados</a></li>                   
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" @click="logout" href="#">Logout</a></li>
+                    <li><a class="dropdown-item"  @click="logout" href="#">Logout</a></li>
                   </ul>
                 </div>
               </div>
@@ -34,12 +32,8 @@
           </header>
 </template>
    
-  
- 
-  
 <script>
 import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
-import { RouterLink, RouterView } from 'vue-router'
 
 export default {
   data() {
@@ -59,3 +53,6 @@ export default {
   },
 };
 </script>
+ 
+  
+  

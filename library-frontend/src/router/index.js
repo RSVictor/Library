@@ -16,65 +16,70 @@ const routes = [
     path: '/favoritos',
     name: 'favoritos',
     component: () => import('../views/FavoritosPage.vue'),
+    meta: { requiresAuth: true }
     
   },
   {
     path: '/descricao',
     name: 'descricao',
-    component: () => import('../views/DescricaoPage.vue')
+    component: () => import('../views/DescricaoPage.vue'),
+    
   },
   {
     path: '/emprestimo',
     name: 'emprestimo',
     component: () => import('../views/EmprestimoPage.vue'),
+    meta: { requiresAuth: true }
     
   },
   {
     path: '/historico',
     name: 'historico',
     component: () => import('../views/HistoricoPage.vue'),
+    meta: { requiresAuth: true }
    
   },
   {
     path: '/cadastro',
     name: 'cadastro',
     component: () => import('../views/CadastroPage.vue')
+
   },
   {
     path: '/adicionarLivro',
     name: 'adicionarLivro',
     component: () => import('../views/AdicionarLivrosPage.vue'),
-   
+    meta: { requiresAuth: true }
   },
   {
     path: '/listalivro',
     name: 'listalivro',
     component: () => import('../views/ListaLivrosPage.vue'),
-    
+    meta: { requiresAuth: true }
   },
   {
     path: '/listaUser',
     name: 'listaUser',
     component: () => import('../views/ListaUserPage.vue'),
-    
+    meta: { requiresAuth: true }
   },
   {
     path: '/historicoADM',
     name: 'historicoADM',
     component: () => import('../views/HistoricoPage.vue'), // Ajuste para o componente correto
-    
+    meta: { requiresAuth: true }
   },
   {
     path: '/PerfilVistaADM',
     name: 'PerfilVistaADM',
     component: () => import('../views/PerfilVistaAdmPage.vue'),
-    
+    meta: { requiresAuth: true }
   },
   {
     path: '/PerfilUser',
     name: 'PerfilUser',
     component: () => import('../views/PerfilUser.vue'),
-   
+    meta: { requiresAuth: true }
   },
   {
     path: '/maisBuscados',
