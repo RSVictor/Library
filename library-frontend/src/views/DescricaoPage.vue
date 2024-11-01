@@ -25,8 +25,8 @@
   
         <div class="container desc p-4 mt-3">
           <div class="card" style="width: 15rem;">
-            <img src="#" class="card-img-top" alt="Código Limpo" style="width: 100%; height: 100%;">
-            <a href="/emprestimo" class="btn btn-primary mt-3" style="background-color: #335844;">Emprestar</a>
+            <img src="#" class="card-img-top" alt="Código Limpo" style="width: 100%; height: 100%;">            
+            <button class="btn btn-primary mt-3" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
           </div>
   
           <div class="descricao p-8">
@@ -99,5 +99,22 @@
         </div>
       </div>
     </div>
+
+  
+    
   </template>
   
+  <script setup>
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+
+const authStore = useAuthStore();
+
+const handleEmprestar = () => {
+  if (!authStore.isLoggedIn) {
+    alert('Você precisa fazer login para emprestar um livro.');
+   router.push('/login');
+  } else {
+    // Lógica para emprestar o livro
+  }
+};
+</script>

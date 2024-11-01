@@ -35,7 +35,7 @@
       <div class="text-lista">
         <div class="button-perfil">
           <div class="button-editar-adm">
-            <a :href="`/PerfilVistaADM/${user.id}`" class="button-link">
+            <a href="`/PerfilVistaADM/${user.id}`" class="button-link">
               <i class="bi bi-person-fill-add"></i>
             </a>
           </div>

@@ -4,7 +4,7 @@
       <p>Bem vindo, Usuario!</p>
       <div class="notificacao">
         <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>
-        <button @click="Logout" class="button-sair">Sair?</button> 
+      
       </div>
     </div>
 
@@ -19,7 +19,7 @@
         <div class="card-body mt-4">
           <h5 class="card-title">Java guia do Programador</h5>
 
-          <a href="/emprestimo" class="btn btn-primary mt-3" style="background-color: #335844 ;">Emprestar</a>
+          <button class="btn btn-primary mt-3" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
         </div>
       </div>
 
@@ -44,3 +44,26 @@
   </div>
    
 </template>
+<script>
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+
+    const handleEmprestar = () => {
+      if (!authStore.isLoggedIn) {
+        alert('Você precisa fazer login para emprestar um livro.');
+        router.push('/login');
+      } else {
+        // Redireciona para a página de empréstimo
+        router.push('/emprestimo');
+      }
+    };
+
+    return { handleEmprestar };
+  },
+};
+</script>

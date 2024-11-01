@@ -19,7 +19,7 @@
                 <div class="dados  mt-2">
                     <div class="foto-botao">
                         <div class="img-foto">
-                            <img src="img/person.png" alt="" style="width: 300px;">
+                            <img src="#" alt="" style="width: 300px;">
 
                         </div>
 
@@ -67,13 +67,13 @@
 
                 <div class="button-perfil-user mt-5">
                     <div class="button-adicionar">
-                        <a href="adicionarLivros.html" class="button-link">
+                        <a href="/adicionarLivro" class="button-link">
                             <i class="bi bi-plus-lg"></i>
                             <span class="button-text">Novo</span>
                         </a>
                     </div>
                     <div class="button-salvar">
-                      <a href="perfil.html" class="button-link">
+                      <a href="/listalivro" class="button-link">
                         <i class="bi bi-check2-square"></i>
                         <span class="button-text">Salvar</span>
                       </a>

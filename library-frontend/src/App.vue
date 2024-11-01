@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router';
 import MenuUser from './components/MenuUser.vue';
 import Rodape from './components/RodapeHome.vue';
 import MenuDeslogado from './components/MenuDeslogado.vue';
-import MenuAdm from './components/MenuAdm.vue';
+import MenuADM from './components/MenuAdm.vue';
 
 const authStore = useAuthStore();
 

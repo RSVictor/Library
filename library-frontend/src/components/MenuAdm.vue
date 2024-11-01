@@ -1,58 +1,59 @@
 <template>
-    <header v-if="isNotAuthPage" class="p-3 mb-4 border-bottom w-100 p-3" style="background-color: #93BFA7;">
-            <div class="container-fluid">
-              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-                  <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-                </a>
-        
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                  <li><a href="/" class="nav-link px-2 link-body-emphasis"><strong>Localivros</strong></a></li>             
-                </ul>
-        
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                  <input type="search" class="form-control" placeholder="Procurar..." aria-label="Search">
-                </form>
-        
-                <div class="dropdown text-end">
-                  <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="#" alt="" width="32" height="32" class="rounded-circle">
-                  </a>
-                  <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="/listalivro">Livros</a></li>
-                    <li><a class="dropdown-item" href="/adicionarLivro">Adicionar livro</a></li>  
-                    <li><a class="dropdown-item" href="/listaUser">Usuários</a></li> 
-                    <li><a class="dropdown-item" href="/maisBuscados">Mais buscados</a></li>                   
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item"  @click="logout" href="#">Logout</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </header>
+  <header class="p-3 mb-4 border-bottom w-100" style="background-color: #93BFA7;">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <RouterLink to="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+            <use xlink:href="#bootstrap"/>
+          </svg>
+        </RouterLink>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li>
+            <RouterLink to="/" class="nav-link px-2 link-body-emphasis">
+              <h3><strong>Localivros</strong></h3>
+            </RouterLink>
+          </li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="search" class="form-control" placeholder="Procurar..." aria-label="Search">
+        </form>
+
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="#" alt="" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small">
+           
+            <li><RouterLink to="/listalivro" class="dropdown-item">Livros</RouterLink></li>
+            <li><RouterLink to="/adicionarLivro" class="dropdown-item">Adicionar livro</RouterLink></li>
+            <li><RouterLink to="/listaUser" class="dropdown-item">Usuários</RouterLink></li>           
+            <li><hr class="dropdown-divider"></li>
+            <li><button class="dropdown-item" @click="logout">Logout</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
-   
+
 <script>
 import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useRouter } from 'vue-router';
 
 export default {
-  data() {
-    return {
-      menuVisible: false,
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.menuVisible = !this.menuVisible;
-    },
-    logout() {
-      const authStore = useAuthStore(); // Obtenha a instância da store
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter(); // Obtenha a instância do router
+
+    // Método de logout
+    const logout = () => {
       authStore.logout(); // Chame o método de logout da store
-      this.$router.push('/login'); // Redirecione para a página de login
-    },
+      router.push('/'); // Redirecione para a página de login
+    };
+
+    return { authStore, logout };
   },
 };
 </script>
- 
-  
-  

@@ -4,7 +4,7 @@
     <p>Bem-vindo, Usuário!</p>
     <div class="notificacao">
       <a href="#" style="color: black;"><i class="bi bi-bell"></i></a>
-      <button @click="Logout" class="button-sair">Sair?</button> 
+      
     </div>
   </div>
 
@@ -46,15 +46,39 @@
 
   <div class="button-emprestimo mt-5 mb-2">
     <div class="button-emp">
-      <a href="/">Adicionar</a>
+      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Adicionar</button>      
     </div>
     <div class="button-emp">
-      <a href="/">Cancelar</a>
+      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Cancelar</button>      
     </div>
     <div class="button-emp">
-      <a href="/historico">Confirmar</a>
+      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Confirmar</button>       
     </div>
   </div>
 </div>
 
 </template>
+
+<script>
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+
+    const handleEmprestar = () => {
+      if (!authStore.isLoggedIn) {
+        alert('Você precisa fazer login para emprestar um livro.');
+        router.push('/login');
+      } else {
+        // Redireciona para a página de empréstimo
+        router.push('/');
+      }
+    };
+
+    return { handleEmprestar };
+  },
+};
+</script>

@@ -36,7 +36,7 @@ const routes = [
     path: '/historico',
     name: 'historico',
     component: () => import('../views/HistoricoPage.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true,  }
    
   },
   {

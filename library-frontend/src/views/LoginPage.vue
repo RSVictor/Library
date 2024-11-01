@@ -58,7 +58,7 @@ export default {
 
         // Redirecionar com base na permissão
         if (response.data.permissions === 'Usuario') {
-          this.$router.push('/PerfilUser'); // Redireciona para a página do usuário
+          this.$router.push('/'); // Redireciona para a página do usuário
         } else if (response.data.permissions === 'ADM') {
           this.$router.push('/listalivro'); // Redireciona para a página de administrador
         } else {

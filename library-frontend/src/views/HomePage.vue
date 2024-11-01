@@ -31,8 +31,8 @@
           </a>
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
-            <div class="button">
-              <a href="/emprestimo" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
               <a href="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
             </div>
           </div>
@@ -130,3 +130,26 @@
   </div>
 </template>
 
+<script>
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+
+    const handleEmprestar = () => {
+      if (!authStore.isLoggedIn) {
+        alert('Você precisa fazer login para emprestar um livro.');
+        router.push('/login');
+      } else {
+        // Lógica para redirecionar para a página de empréstimo
+        router.push('/emprestimo');
+      }
+    };
+
+    return { handleEmprestar };
+  },
+};
+</script>

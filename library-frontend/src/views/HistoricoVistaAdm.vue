@@ -6,7 +6,7 @@
       <a href="#" style="color: black;">
         <i class="bi bi-bell"></i>
       </a>
-      <button @click="Logout" class="button-sair">Sair?</button>  
+      
     </div>
   </div>
    

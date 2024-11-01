@@ -6,7 +6,7 @@
       <a href="#" style="color: black;">
         <i class="bi bi-bell"></i>
       </a>
-      <button @click="Logout" class="button-sair">Sair?</button> 
+      
     </div>
   </div>
 
@@ -18,7 +18,7 @@
     <div class="dados mt-4">
       <div class="foto-botao">
         <div class="img-foto">
-          <img src="img/person.png" alt="Foto do usuário">
+          <img src="" alt="Foto do usuário">
         </div>
       </div>
 
