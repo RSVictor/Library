@@ -66,7 +66,7 @@ const routes = [
   {
     path: '/historicoADM',
     name: 'historicoADM',
-    component: () => import('../views/HistoricoPage.vue'), // Ajuste para o componente correto
+    component: () => import('../views/HistoricoVistaAdm.vue'), // Ajuste para o componente correto
     meta: { requiresAuth: true }
   },
   {

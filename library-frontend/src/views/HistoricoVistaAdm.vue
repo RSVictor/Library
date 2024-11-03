@@ -1,14 +1,14 @@
 <template>
 <div class="container"> 
   <div class="user">      
-    <p>Bem-vindo, Usuário!</p>  
-    <div class="notificacao">
-      <a href="#" style="color: black;">
-        <i class="bi bi-bell"></i>
-      </a>
+    <p>Bem-vindo, Usuário!</p>      
+  </div>
+  <div class="titulo-adm-button ">
+      <div class="button-adm"><RouterLink to="/listalivro" >Livros</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/listaUser">Usuários</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink></div>
       
     </div>
-  </div>
    
   <div class="titulo-emp mt-4">
     <span>Histórico de Empréstimo do Usuário(a)</span>     

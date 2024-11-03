@@ -2,12 +2,6 @@
 <div class="container">
   <div class="user">
     <p>Bem-vindo, Usuário!</p>
-    <div class="notificacao">
-      <a href="#" style="color: black;">
-        <i class="bi bi-bell"></i>
-      </a>
-      
-    </div>
   </div>
 
   <div class="titulo-fav">
@@ -18,29 +12,37 @@
     <span>Você tem 1 item</span>
   </div>
 
-  <div class="card-fav mt-5">
-    <a href="/descricao">
-      <img src="#" alt="Livro favorito">
-    </a>
-    <div class="card-body mt-4">
-      <h5 class="card-title">Java Guia do Programador</h5>
-      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Emprestar</button> 
-    </div>
-  </div>
+    <div class="card-fav mt-5">
+      <router-link to="/descricao">
+        <img src="#" class="card-img-top mt-2" alt="...">
+      </router-link>
+        <div class="card-body mt-4">
+          <h5 class="card-title">Java guia do Programador</h5>         
+        </div>
+      </div>
+    
+  
 
   <div class="button-favorito mt-5">
-    <div class="button-excluir">
-      <a href="#" @click="handleEmprestar" class="button-link">
+    <div class="button-salvar">
+  <router-link to="/emprestimo" class="button-link">
+    <i class="bi bi-plus-lg"></i>
+    <span class="button-text">Emprestar</span>
+  </router-link>
+</div>
+    <div class="button-excluir">      
+      <router-link to="#" class="button-link">
         <i class="bi bi-trash"></i>
         <span class="button-text">Excluir</span>
-      </a>
+      </router-link>
     </div>
     <div class="button-salvar">
-      <a href="#" @click="handleEmprestar" class="button-link">
-        <i class="bi bi-plus-lg"></i>
-        <span class="button-text">Adicionar</span>
-      </a>
-    </div>
+  <router-link to="/" class="button-link">
+    <i class="bi bi-plus-lg"></i>
+    <span class="button-text">Adicionar</span>
+  </router-link>
+</div>
+
   </div>
 </div>
 

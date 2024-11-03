@@ -2,19 +2,21 @@
   <div class="container">
   <div class="user">
     <p>Bem-vindo, Usuário!</p>
-    <div class="notificacao">
-      <a href="#" style="color: black;">
-        <i class="bi bi-bell"></i>
-      </a>
-      
-    </div>
+   
   </div>
 
+  <div class="titulo-adm-button ">
+      <div class="button-adm"><RouterLink to="/listalivro" >Livros</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/listaUser">Usuários</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink></div>
+      
+    </div>
   <div class="perfil mt-3">
     <div class="titulo-perfil">
-      <span>Perfil do Usuário</span>
+      <span>Perfil do Usuário(a)</span>
     </div>
 
+    
     <div class="dados mt-4">
       <div class="foto-botao">
         <div class="img-foto">
@@ -41,10 +43,12 @@
 
     <div class="button-perfil-user mt-4">
       <div class="button-ver-historico">
-        <a href="/historicoADM" class="button-link">
-          <i class="bi bi-file-earmark-text"></i>
-          <span class="button-text">Ver Histórico</span>
-        </a>
+        <div class="button-perfil">
+          <div class="button-link">
+            <RouterLink to="/historicoADM" class="button-link"  ><i class="bi bi-file-earmark-text"></i><span class="button-text">Ver Histórico</span></RouterLink>
+            </div>          
+        </div>
+        
       </div>
     </div>
   </div>

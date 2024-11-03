@@ -142,26 +142,11 @@ i {
 
 
 
-.offcanvas-custom {
-    align-items: center;
 
 
-}
 
-.card-offcanvas {
-    width: 219px;
-    height: 250px;
-}
 
-.card-offcanvas .card-img-top {
-    display: flex;
-    width: 180px;
-    height: 190px;
-    background-color: #93BFA7;
-    margin-left: auto;
-    margin-right: auto;
 
-}
 
 
 /*pagiana descriçao livros*/

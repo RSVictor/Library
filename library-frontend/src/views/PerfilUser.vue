@@ -1,14 +1,7 @@
 <template>
     <div class="container">
       <div class="user">
-        <p>Bem-vindo, {{ username }}</p>
-        <div class="notificacao">
-          <a href="#" style="color: black;">
-            <i class="bi bi-bell"></i>
-          </a>
-         
-         
-        </div>
+        <p>Bem-vindo, {{ username }}</p>        
       </div>
   
       <div class="perfil mt-3">
@@ -56,9 +49,7 @@
             </a>
           </div>
           <div >
-            <button class="button-salvar" type="submit">Salvar</button>
-              <i class="bi bi-check2-square"></i>             
-            
+            <button class="button-salvar" type="submit"><i class="bi bi-check2-square"></i>Salvar</button>
           </div>
         </div>
       </div>

@@ -1,17 +1,13 @@
 <template>
     <div class="container">
     <div class="user">
-      <p>Bem vindo, Usuario!</p>
-      <div class="notificacao">
-        <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>
-        
-      </div>
+      <p>Bem vindo, Usuario!</p>      
     </div>
 
     <div class="titulo-adm-button ">
-      <div class="button-adm"><a href="/listalivro">Livros</a></div>
-      <div class="button-adm"><a href="/listaUser">Usuários</a></div>
-      <div class="button-adm"><a href="/adicionarLivro">Adicionar Livros</a></div>
+      <div class="button-adm"><RouterLink to="/listalivro" >Livros</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/listaUser">Usuários</RouterLink></div>
+      <div class="button-adm"><RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink></div>
       <div class="input-adm">
         <input type="text" name="" id="" placeholder="Pesquisar livros">
         <button><i class="bi bi-search"></i></button>
@@ -38,14 +34,10 @@
       <div class="text-lista">
         <div class="button-perfil">
           <div class="button-editar-adm">
-            <a href="" class="button-link">
-              <i class="bi bi-pencil-square"></i>
-            </a>
+            <RouterLink to="/adicionarlivro" class="button-link"  ><i class="bi bi-pencil-square"></i></RouterLink>
           </div>
           <div class="button-excluir-adm">
-            <a href="" class="button-link">
-              <i class="bi bi-trash"></i>
-            </a>
+            <RouterLink to="/listalivro" class="button-link"  > <i class="bi bi-trash"></i></RouterLink>
           </div>
         </div>
       </div>
@@ -60,14 +52,10 @@
       <div class="text-lista">
         <div class="button-perfil">
           <div class="button-editar-adm">
-            <a href="" class="button-link">
-              <i class="bi bi-pencil-square"></i>
-            </a>
+            <RouterLink to="/adicionarlivro" class="button-link"  ><i class="bi bi-pencil-square"></i></RouterLink>
           </div>
           <div class="button-excluir-adm">
-            <a href="" class="button-link">
-              <i class="bi bi-trash"></i>
-            </a>
+            <RouterLink to="/listalivro" class="button-link"  > <i class="bi bi-trash"></i></RouterLink>
           </div>
         </div>
       </div>

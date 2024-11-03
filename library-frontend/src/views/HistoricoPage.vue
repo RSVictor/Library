@@ -30,26 +30,7 @@
       <div class="text-emp">Data de Devolução</div>
     </div>
 
-    <div class="descricao-emprestimo mt-3">
-      <div class="card-emp">
-        <img src="#" style="height: 170px;" alt="Java Guia do Programador">
-        <div>
-          <h5 class="card-title mt-3">Java Guia do Programador</h5>
-        </div>
-      </div>
-
-      <div class="hist-autor">
-        <div class="hist-autor-nome">Autor: José da Silva</div>
-      </div>
-
-      <div class="emp-data-emp">
-        <div class="data">Data de Empréstimo: 25/08/2008</div>
-      </div>
-
-      <div class="emp-data-dev">
-        <div class="data">Data de Devolução: 25/09/2008</div>
-      </div>
-    </div>
+  
 
     <div class="descricao-emprestimo mt-3">
       <div class="card-emp">

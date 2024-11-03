@@ -1,13 +1,14 @@
 <template>
    <div class="container">
         <div class="user">
-          <p>Bem vindo, Usuario!</p>
-          <div class="notificacao">
-            <a href="#" style="color: black;"><i class="bi bi-bell style"></i></a>            
-          </div>
+          <p>Bem vindo, Usuario!</p>         
         </div>
 
-        <div class="titulo-emp ">
+      
+      
+      
+        <div class="titulo-emp">
+            
             <span>Adicionar ou editar livros</span>
         </div>
 
@@ -64,20 +65,15 @@
             <div class="form-descricao ">
                 <label for="floatingInput">Descrição:</label>
                 <input type="text" class="form-control" id="floatingInput" style="height: 150px;">
-
+                
+                
                 <div class="button-perfil-user mt-5">
-                    <div class="button-adicionar">
-                        <a href="/adicionarLivro" class="button-link">
-                            <i class="bi bi-plus-lg"></i>
-                            <span class="button-text">Novo</span>
-                        </a>
-                    </div>
-                    <div class="button-salvar">
-                      <a href="/listalivro" class="button-link">
-                        <i class="bi bi-check2-square"></i>
-                        <span class="button-text">Salvar</span>
-                      </a>
-                    </div>
+                    <div class="button-adm"><RouterLink to="/adicionarLivro"><i class="bi bi-plus-lg"></i>
+                        <span class="button-text">Novo</span></RouterLink>
+                        </div>
+                        <div class="button-adm"><RouterLink to="/listalivro"><i class="bi bi-check2-square"></i>
+                            <span class="button-text">Salvar</span></RouterLink>
+                        </div>                    
                   </div>
                 
             </div>

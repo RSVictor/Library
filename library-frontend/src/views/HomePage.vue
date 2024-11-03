@@ -26,98 +26,112 @@
       <span>Livros</span>
       <div class="col-3">
         <div class="card mt-3">
-          <a href="/descricao">
-            <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
-          </a>
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
               <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
-              <a href="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Arquitetura de Software">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Arquitetura de Software</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Arquitetura Limpa">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Arquitetura Limpa</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Use a Cabeça C#">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Use a cabeça C#</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="O Programador Pragmático">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">O Programador Pragmático</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Código Limpo">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Código Limpo</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Lógica de Programação">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Lógica de Programação</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="card mt-3">
-          <img src="#" class="card-img-top mt-2" alt="Introdução à Python">
+         <router-link to="/descricao">
+         <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+         </router-link>
           <div class="card-body">
-            <h5 class="card-title">Introdução à Python</h5>
-            <div class="button">
-              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-primary" style="background-color: #335844;">Emprestar</a>
-              <a href="#" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></a>
+            <h5 class="card-title">Programador Autodidata</h5>
+            <div class="button">              
+              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
         </div>

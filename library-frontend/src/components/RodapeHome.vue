@@ -8,8 +8,8 @@ const route = useRoute();
 <template>
     <div v-if="route.name !== 'login' && route.name !== 'cadastro'"  class="barra-verde mt-3">
       <p>Redes Sociais
-        <i class="bi bi-facebook">
-        </i><i class="bi bi-twitter-x"></i>
+        <i class="bi bi-facebook"></i>
+        <i class="bi bi-linkedin"></i>
         <i class="bi bi-instagram"></i>
       </p>
 

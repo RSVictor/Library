@@ -1,11 +1,7 @@
 <template>
     <div class="container">
   <div class="user">
-    <p>Bem-vindo, Usuário!</p>
-    <div class="notificacao">
-      <a href="#" style="color: black;"><i class="bi bi-bell"></i></a>
-      
-    </div>
+    <p>Bem-vindo, Usuário!</p>   
   </div>
 
   <div class="titulo-emp">

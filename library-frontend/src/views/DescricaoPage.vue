@@ -104,17 +104,26 @@
     
   </template>
   
-  <script setup>
+  <script>
 import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useRouter } from 'vue-router';
 
-const authStore = useAuthStore();
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
 
-const handleEmprestar = () => {
-  if (!authStore.isLoggedIn) {
-    alert('Você precisa fazer login para emprestar um livro.');
-   router.push('/login');
-  } else {
-    // Lógica para emprestar o livro
-  }
+    const handleEmprestar = () => {
+      if (!authStore.isLoggedIn) {
+        alert('Você precisa fazer login para emprestar um livro.');
+        router.push('/login');
+      } else {
+        // Redireciona para a página de empréstimo
+        router.push('/emprestimo');
+      }
+    };
+
+    return { handleEmprestar };
+  },
 };
 </script>

@@ -90,7 +90,7 @@ export default {
 }
 html, body, main {  
   width: 100%;
-  height: 850px;
+  height: 610px;
   display: flex;
   align-items: center;
   justify-content: center;
