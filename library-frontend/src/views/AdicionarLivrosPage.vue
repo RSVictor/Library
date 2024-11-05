@@ -68,13 +68,23 @@
                 
                 
                 <div class="button-perfil-user mt-5">
-                    <div class="button-adm"><RouterLink to="/adicionarLivro"><i class="bi bi-plus-lg"></i>
-                        <span class="button-text">Novo</span></RouterLink>
-                        </div>
-                        <div class="button-adm"><RouterLink to="/listalivro"><i class="bi bi-check2-square"></i>
-                            <span class="button-text">Salvar</span></RouterLink>
-                        </div>                    
+                    <div class="button-salvar">
+  <router-link to="/adicionarLivro" class="button-link">
+    <i class="bi bi-plus-lg"></i>
+    <span class="button-text">Adicionar</span>
+  </router-link>
+</div>
+<div class="button-salvar">
+  <router-link to="/listalivro" class="button-link">
+    <i class="bi bi-check2-square"></i>
+    <span class="button-text">Salvar</span>
+  </router-link>
+</div>
+                                            
                   </div>
+
+                  
+                  
                 
             </div>
 

@@ -22,6 +22,7 @@
             
           </a>
           <ul class="dropdown-menu text-small">
+            <li><RouterLink to="/" class="dropdown-item">Home</RouterLink></li>
             <li><RouterLink to="/PerfilUser" class="dropdown-item">Minha Conta</RouterLink></li>
             <li><RouterLink to="/historico" class="dropdown-item">Histórico</RouterLink></li>
             <li><RouterLink to="/favoritos" class="dropdown-item">Favoritos</RouterLink></li>
@@ -53,6 +54,8 @@ export default {
       const authStore = useAuthStore(); // Obtenha a instância da store
       authStore.logout(); // Chame o método de logout da store
       this.$router.push('/'); // Redirecione para a página de login
+      alert('Logout realizado!');
+      router.push('/'); // Redireciona para a página home
     },
   },
 };

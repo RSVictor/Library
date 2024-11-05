@@ -141,14 +141,6 @@ i {
 }
 
 
-
-
-
-
-
-
-
-
 /*pagiana descriçao livros*/
 .descricao {
     width: 600px;
@@ -404,6 +396,7 @@ i {
     height: 40px;    
     background-color: #335844;
     border-radius: 10px;   
+    border: none;
    }
 
 
@@ -578,6 +571,7 @@ i {
     color: white;
     border-radius: 10px;
     margin: 0 5px;
+    border: none;
     
   }
   .button-salvar {
@@ -590,6 +584,7 @@ i {
     color: white;
     border-radius: 10px;
     margin: 0 5px;
+    border: none;
     
   }
   

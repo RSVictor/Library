@@ -42,11 +42,8 @@
         </div>
   
         <div class="button-perfil-user">
-          <div class="button-excluir">
-            <a href="#" class="button-link" @click.prevent="deleteUser">
-              <i class="bi bi-trash"></i>
-              <span class="button-text">Excluir</span>
-            </a>
+          <div>
+            <button class="button-excluir" type="submit" @click.prevent="deleteUser" > <i class="bi bi-trash"></i>Excluir</button>
           </div>
           <div >
             <button class="button-salvar" type="submit"><i class="bi bi-check2-square"></i>Salvar</button>

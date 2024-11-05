@@ -40,16 +40,25 @@
     </div>
   </div>
 
-  <div class="button-emprestimo mt-5 mb-2">
-    <div class="button-emp">
-      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Adicionar</button>      
+  <div class="button-favorito mt-5">
+    <div class="button-salvar">
+  <router-link to="/" class="button-link">
+    <i class="bi bi-plus-lg"></i>
+    <span class="button-text">Adicionar</span>
+  </router-link>
+</div>
+    <div class="button-excluir">      
+      <router-link to="#" class="button-link">
+        <i class="bi bi-x-lg"></i>
+        <span class="button-text">Cancelar</span>
+      </router-link>
     </div>
-    <div class="button-emp">
-      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Cancelar</button>      
-    </div>
-    <div class="button-emp">
-      <button class="btn btn-primary " style="background-color: #335844;" @click="handleEmprestar">Confirmar</button>       
-    </div>
+    <div class="button-salvar">
+  <router-link to="/emprestimo" class="button-link" @click="handleEmprestar">
+    <i class="bi bi-check-lg"></i>
+    <span class="button-text">Confirmar</span>
+  </router-link>
+</div>
   </div>
 </div>
 
@@ -64,17 +73,20 @@ export default {
     const authStore = useAuthStore();
     const router = useRouter();
 
+    // Função que será chamada quando o usuário tentar realizar o empréstimo
     const handleEmprestar = () => {
       if (!authStore.isLoggedIn) {
         alert('Você precisa fazer login para emprestar um livro.');
-        router.push('/login');
+        router.push('/login'); // Redireciona para a página de login caso não esteja autenticado
       } else {
-        // Redireciona para a página de empréstimo
-        router.push('/');
+        // Exemplo de como seria a lógica para realizar o empréstimo
+        // Aqui você pode adicionar a lógica para confirmar o empréstimo do livro
+        alert('Empréstimo realizado!');
+        router.push('/historico'); // Redireciona para a página de histórico de empréstimos
       }
     };
 
     return { handleEmprestar };
-  },
+  }
 };
 </script>

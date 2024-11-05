@@ -26,7 +26,7 @@
         <div class="container desc p-4 mt-3">
           <div class="card" style="width: 15rem;">
             <img src="#" class="card-img-top" alt="Código Limpo" style="width: 100%; height: 100%;">            
-            <button class="btn btn-primary mt-3" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+            <button class="btn btn-primary mt-3" style="background-color: #335844; border: none;" @click="handleEmprestar">Emprestar</button>
           </div>
   
           <div class="descricao p-8">

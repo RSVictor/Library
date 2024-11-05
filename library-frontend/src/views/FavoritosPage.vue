@@ -23,27 +23,27 @@
     
   
 
-  <div class="button-favorito mt-5">
-    <div class="button-salvar">
-  <router-link to="/emprestimo" class="button-link">
-    <i class="bi bi-plus-lg"></i>
-    <span class="button-text">Emprestar</span>
-  </router-link>
-</div>
-    <div class="button-excluir">      
-      <router-link to="#" class="button-link">
-        <i class="bi bi-trash"></i>
-        <span class="button-text">Excluir</span>
-      </router-link>
-    </div>
+      <div class="button-favorito mt-5">
     <div class="button-salvar">
   <router-link to="/" class="button-link">
     <i class="bi bi-plus-lg"></i>
     <span class="button-text">Adicionar</span>
   </router-link>
 </div>
-
+    <div class="button-excluir">      
+      <router-link to="#" class="button-link">
+        <i class="bi bi-x-lg"></i>
+        <span class="button-text">Cancelar</span>
+      </router-link>
+    </div>
+    <div class="button-salvar">
+  <router-link to="/emprestimo" class="button-link" >
+    <i class="bi bi-check-lg"></i>
+    <span class="button-text">Emprestar</span>
+  </router-link>
+</div>
   </div>
+  
 </div>
 
 </template>
@@ -63,7 +63,7 @@ export default {
         router.push('/login');
       } else {
         // Redireciona para a página de empréstimo
-        router.push('/emprestimo');
+        router.push('/historico');
       }
     };
 

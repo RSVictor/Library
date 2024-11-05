@@ -32,7 +32,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -46,7 +46,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -60,7 +60,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -74,7 +74,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -88,7 +88,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -102,7 +102,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -116,7 +116,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>
@@ -130,7 +130,7 @@
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
             <div class="button">              
-              <button class="btn btn-primary" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px" @click="handleEmprestar">Emprestar</button>
               <router-link to="/favoritos" class="btn btn-primary" style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
             </div>
           </div>

@@ -49,9 +49,11 @@ export default {
     const logout = () => {
       authStore.logout(); // Chame o método de logout da store
       router.push('/'); // Redirecione para a página de login
+      alert('Logout realizado!');
     };
 
     return { authStore, logout };
+ 
   },
 };
 </script>
