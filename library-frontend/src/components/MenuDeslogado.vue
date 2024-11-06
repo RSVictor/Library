@@ -16,7 +16,7 @@ const isNotAuthPage = computed(() => route.name !== 'login' && route.name !== 'c
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li>
             <RouterLink to="/" class="nav-link px-2 link-body-emphasis">
-              <h3><strong>Localivros</strong></h3>
+              <h3><strong>BookMange</strong></h3>
             </RouterLink>
           </li>
           

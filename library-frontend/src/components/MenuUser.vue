@@ -7,7 +7,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li class="text-center">
             <RouterLink to="/" class="nav-link px-2 link-body-emphasis">
-              <h3><strong>Localivros</strong></h3>
+              <h3><strong>BookMange</strong></h3>
             </RouterLink>
           </li>
         </ul>

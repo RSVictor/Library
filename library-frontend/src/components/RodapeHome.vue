@@ -15,7 +15,7 @@ const route = useRoute();
 
 
       <div class="rodape">
-        <p>© [2024] [localivros]. Todos os direitos reservados.</p>
+        <p>© [2024] [BookMange]. Todos os direitos reservados.</p>
       </div>
     </div>
 
