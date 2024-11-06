@@ -57,7 +57,8 @@
                             <input type="text" class="form-control" id="floatingInput" placeholder="" v-model="gender">
 
                             <label for="floatingInput">Quantidade:</label>
-                            <input type="number" class="form-control" id="floatingInput" placeholder="" v-model="amount">
+                            <input type="number" class="form-control" id="floatingInput" placeholder=""
+                                v-model="amount">
 
                         </div>
                     </form>

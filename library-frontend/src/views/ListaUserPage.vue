@@ -2,12 +2,18 @@
   <div class="container">
     <div class="user">
       <p>Bem-vindo, Usuário!</p>
-      </div>
+    </div>
 
-      <div class="titulo-adm-button ">
-      <div class="button-adm"><RouterLink to="/listalivro" >Livros</RouterLink></div>
-      <div class="button-adm"><RouterLink to="/listaUser">Usuários</RouterLink></div>
-      <div class="button-adm"><RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink></div>
+    <div class="titulo-adm-button ">
+      <div class="button-adm">
+        <RouterLink to="/listalivro">Livros</RouterLink>
+      </div>
+      <div class="button-adm">
+        <RouterLink to="/listaUser">Usuários</RouterLink>
+      </div>
+      <div class="button-adm">
+        <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
+      </div>
       <div class="input-adm">
         <input type="text" name="" id="" placeholder="Pesquisar Usuários">
         <button><i class="bi bi-search"></i></button>
@@ -33,10 +39,10 @@
       <div class="text-lista">
         <div class="button-perfil">
           <div class="button-editar-adm">
-            <RouterLink to="/PerfilVistaADM" class="button-link"  ><i class="bi bi-person-fill-add"></i></RouterLink>
-            </div>
+            <RouterLink to="/PerfilVistaADM" class="button-link"><i class="bi bi-person-fill-add"></i></RouterLink>
+          </div>
           <div class="button-editar-adm">
-            <RouterLink to="#" class="button-link"  ><i class="bi bi-person-fill-slash"></i></RouterLink>
+            <RouterLink to="#" class="button-link"><i class="bi bi-person-fill-slash"></i></RouterLink>
           </div>
         </div>
       </div>
@@ -51,21 +57,21 @@
       <div class="text-lista">
         <div class="button-perfil">
           <div class="button-editar-adm">
-            <RouterLink to="/PerfilVistaADM" class="button-link"  ><i class="bi bi-person-fill-add"></i></RouterLink>
-            </div>
+            <RouterLink to="/PerfilVistaADM" class="button-link"><i class="bi bi-person-fill-add"></i></RouterLink>
+          </div>
           <div class="button-editar-adm">
-            <RouterLink to="#" class="button-link"  ><i class="bi bi-person-fill-slash"></i></RouterLink>
+            <RouterLink to="#" class="button-link"><i class="bi bi-person-fill-slash"></i></RouterLink>
           </div>
         </div>
       </div>
     </div>
 
-    
 
-  
 
-   
-    </div>
+
+
+
+  </div>
 </template>
 
 <script>

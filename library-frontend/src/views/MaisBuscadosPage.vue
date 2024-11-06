@@ -1,7 +1,7 @@
 <template>
- <div class="container">
+  <div class="container">
     <div class="user">
-      <p>Bem vindo, Usuario!</p>     
+      <p>Bem vindo, Usuario!</p>
     </div>
 
     <div class="titulo-fav ">
@@ -15,7 +15,8 @@
         <div class="card-body mt-4">
           <h5 class="card-title">Java guia do Programador</h5>
 
-          <button class="btn btn-primary mt-3" style="background-color: #335844;" @click="handleEmprestar">Emprestar</button>
+          <button class="btn btn-primary mt-3" style="background-color: #335844;"
+            @click="handleEmprestar">Emprestar</button>
         </div>
       </div>
 
@@ -38,7 +39,7 @@
     </div>
 
   </div>
-   
+
 </template>
 <script>
 import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário

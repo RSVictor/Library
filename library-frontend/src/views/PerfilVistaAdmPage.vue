@@ -1,57 +1,64 @@
 <template>
   <div class="container">
-  <div class="user">
-    <p>Bem-vindo, Usuário!</p>
-   
-  </div>
+    <div class="user">
+      <p>Bem-vindo, Usuário!</p>
 
-  <div class="titulo-adm-button ">
-      <div class="button-adm"><RouterLink to="/listalivro" >Livros</RouterLink></div>
-      <div class="button-adm"><RouterLink to="/listaUser">Usuários</RouterLink></div>
-      <div class="button-adm"><RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink></div>
-      
-    </div>
-  <div class="perfil mt-3">
-    <div class="titulo-perfil">
-      <span>Perfil do Usuário(a)</span>
     </div>
 
-    
-    <div class="dados mt-4">
-      <div class="foto-botao">
-        <div class="img-foto">
-          <img src="" alt="Foto do usuário">
-        </div>
+    <div class="titulo-adm-button ">
+      <div class="button-adm">
+        <RouterLink to="/listalivro">Livros</RouterLink>
+      </div>
+      <div class="button-adm">
+        <RouterLink to="/listaUser">Usuários</RouterLink>
+      </div>
+      <div class="button-adm">
+        <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
       </div>
 
-      <form>
-        <div class="form-perfil mt-5">
-          <label for="nomeInput">Nome:</label>
-          <input class="form-control" id="nomeInput" value="Nome do Usuário" disabled>
-
-          <label for="emailInput" class="mt-3">Email:</label>
-          <input class="form-control" id="emailInput" value="usuario@email.com" disabled>
-
-          <label for="idInput" class="mt-3">ID:</label>
-          <input class="form-control" id="idInput" value="123456" disabled>
-
-          <label for="statusInput" class="mt-3">Status:</label>
-          <input class="form-control" id="statusInput" value="Ativo" disabled>
-        </div>
-      </form>
     </div>
+    <div class="perfil mt-3">
+      <div class="titulo-perfil">
+        <span>Perfil do Usuário(a)</span>
+      </div>
 
-    <div class="button-perfil-user mt-4">
-      <div class="button-ver-historico">
-        <div class="button-perfil">
-          <div class="button-link">
-            <RouterLink to="/historicoADM" class="button-link"  ><i class="bi bi-file-earmark-text"></i><span class="button-text">Ver Histórico</span></RouterLink>
-            </div>          
+
+      <div class="dados mt-4">
+        <div class="foto-botao">
+          <div class="img-foto">
+            <img src="" alt="Foto do usuário">
+          </div>
         </div>
-        
+
+        <form>
+          <div class="form-perfil mt-5">
+            <label for="nomeInput">Nome:</label>
+            <input class="form-control" id="nomeInput" value="Nome do Usuário" disabled>
+
+            <label for="emailInput" class="mt-3">Email:</label>
+            <input class="form-control" id="emailInput" value="usuario@email.com" disabled>
+
+            <label for="idInput" class="mt-3">ID:</label>
+            <input class="form-control" id="idInput" value="123456" disabled>
+
+            <label for="statusInput" class="mt-3">Status:</label>
+            <input class="form-control" id="statusInput" value="Ativo" disabled>
+          </div>
+        </form>
+      </div>
+
+      <div class="button-perfil-user mt-4">
+        <div class="button-ver-historico">
+          <div class="button-perfil">
+            <div class="button-link">
+              <RouterLink to="/historicoADM" class="button-link"><i class="bi bi-file-earmark-text"></i><span
+                  class="button-text">Ver Histórico</span></RouterLink>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </template>

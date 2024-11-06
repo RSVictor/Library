@@ -2,37 +2,22 @@
   <main class="form-container w-100 m-auto">
     <form @submit.prevent="registerUser">
       <h1 class="h3 mb-3 fw-normal">Cadastrar</h1>
-      
+
       <div class="form-floating">
-        <input
-          type="text"
-          v-model="username"
-          class="form-control"
-          :id="'floatingInput_' + uniqueId"
-          placeholder="Nome"
-        />
+        <input type="text" v-model="username" class="form-control" :id="'floatingInput_' + uniqueId"
+          placeholder="Nome" />
         <label :for="'floatingInput_' + uniqueId">Nome</label>
       </div>
-      
+
       <div class="form-floating mt-2">
-        <input
-          type="email"
-          v-model="email"
-          class="form-control"
-          :id="'floatingEmail_' + uniqueId"
-          placeholder="name@example.com"
-        />
+        <input type="email" v-model="email" class="form-control" :id="'floatingEmail_' + uniqueId"
+          placeholder="name@example.com" />
         <label :for="'floatingEmail_' + uniqueId">Email</label>
       </div>
-      
+
       <div class="form-floating mt-2">
-        <input
-          type="password"
-          v-model="password"
-          class="form-control"
-          :id="'floatingPassword_' + uniqueId"
-          placeholder="Senha"
-        />
+        <input type="password" v-model="password" class="form-control" :id="'floatingPassword_' + uniqueId"
+          placeholder="Senha" />
         <label :for="'floatingPassword_' + uniqueId">Senha</label>
       </div>
 
@@ -85,10 +70,13 @@ export default {
 </script>
 
 <style scoped>
-.form-container {  
+.form-container {
   width: 100%;
 }
-html, body, main {  
+
+html,
+body,
+main {
   width: 100%;
   height: 610px;
   display: flex;

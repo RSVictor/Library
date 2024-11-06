@@ -3,23 +3,11 @@
     <form @submit.prevent="loginUser">
       <h1 class="h3 mb-3 fw-normal">Entrar</h1>
       <div class="form-floating">
-        <input
-          type="email"
-          v-model="email"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-        />
+        <input type="email" v-model="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
         <label for="floatingInput">Email</label>
       </div>
       <div class="form-floating mt-2">
-        <input
-          type="password"
-          v-model="password"
-          class="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-        />
+        <input type="password" v-model="password" class="form-control" id="floatingPassword" placeholder="Password" />
         <label for="floatingPassword">Senha</label>
       </div>
       <p v-if="message" class="text-danger">{{ message }}</p>
@@ -65,7 +53,7 @@ export default {
           this.message = 'Permissão desconhecida!';
         }
       } catch (error) {
-        this.message = 
+        this.message =
           error.response && error.response.data && error.response.data.message
             ? error.response.data.message
             : 'Erro ao fazer login.';
@@ -79,7 +67,10 @@ export default {
 .form-container {
   width: 100%;
 }
-html, body, main {
+
+html,
+body,
+main {
   width: 100%;
   height: 610px;
   display: flex;
