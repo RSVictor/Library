@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 
+
 const routes = [
   {
     path: '/',
@@ -48,7 +49,14 @@ const routes = [
   {
     path: '/adicionarLivro',
     name: 'adicionarLivro',
-    component: () => import('../views/AdicionarLivrosPage.vue'),
+    component: () => import('../views/AdicionarLivrosPage.vue'),    
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/editarlivro/:id',
+    name: 'editarlivro',
+    component: () => import('../views/EditarLivro.vue'),
+    props: true,
     meta: { requiresAuth: true }
   },
   {

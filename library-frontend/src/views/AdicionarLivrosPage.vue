@@ -9,7 +9,7 @@
 
         <div class="titulo-emp">
 
-            <span>Adicionar ou editar livros</span>
+            <span>Adicionar livro</span>
         </div>
 
 
@@ -25,7 +25,7 @@
                         </div>
 
                         <form @submit.prevent="enviarFormulario">
-                            <div class="button-foto mt-3">
+                            <div class="button-foto mt-3" >
                                 <label for="fileInput" class="custom-file-upload " style="cursor: pointer;">
                                     Adicionar Capa
                                 </label>
