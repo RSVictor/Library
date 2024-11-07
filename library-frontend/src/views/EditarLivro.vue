@@ -19,9 +19,8 @@
 
                 <div class="dados  mt-2">
                     <div class="foto-botao">
-                        <div class="img-foto">                           
-                            <img :src="book.image" alt="Capa do livro" style="width: 300px;" />
-
+                        <div class="img-foto" v-if="book.image">                         
+                            <img :src="formatImagePath(book.image)" alt="" style="width: 300px;">
                         </div>
 
                       
@@ -93,75 +92,84 @@
 
 </template>
 
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        book: {
-          code: '',
-          title: '',
-          author: '',
-          year: '',
-          gender: '',
-          amount: '',
-          description: '',
-          image: null,
-        },
-      };
-    },
-    created() {
-      // Chama o método para buscar os dados do livro
-      this.fetchBookData();
-    },
-    methods: {
-      // Busca os dados do livro baseado no ID da URL
-      async fetchBookData() {
-        const bookId = this.$route.params.id;  // Pega o ID da URL
-        try {
-          const response = await axios.get(`http://localhost:3000/api/books/${bookId}`);
-          this.book = response.data;  // Atualiza os dados do livro no estado
-        } catch (error) {
-          console.error('Erro ao buscar dados do livro:', error);
-        }
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      book: {
+        code: '',
+        title: '',
+        author: '',
+        year: '',
+        gender: '',
+        amount: '',
+        description: '',
+        image: null,        
       },
-  
-      // Lida com o upload de uma nova imagem
-      handleFileUpload(event) {
-        this.book.image = event.target.files[0];  // Atualiza a imagem do livro
-      },
-  
-      // Envia os dados do formulário para atualizar o livro
-      async enviarFormulario() {
-        const formData = new FormData();
-        formData.append('code', this.book.code);
-        formData.append('title', this.book.title);
-        formData.append('author', this.book.author);
-        formData.append('year', this.book.year);
-        formData.append('gender', this.book.gender);
-        formData.append('amount', this.book.amount);
-        formData.append('description', this.book.description);
-        
-        if (this.book.image) {
-          formData.append('image', this.book.image);  // Anexa a imagem, se houver
+    };
+  },
+  mounted() {
+    this.fetchBookData();
+  },
+  methods: {
+    async fetchBookData() {
+      const bookId = this.$route.params.id;
+      console.log('ID do livro:', bookId);
+
+      try {
+        const response = await axios.get(`http://localhost:3000/api/books/${bookId}`);
+        console.log('Dados do livro:', response.data);
+
+        if (response.data) {
+          this.book = response.data;
+        } else {
+          alert('Livro não encontrado.');
         }
-  
-        try {
-          // Faz o PUT para atualizar o livro
-          const response = await axios.put(`http://localhost:3000/api/books/${this.book.code}`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          });
-  
-          console.log('Livro atualizado:', response.data);
-          alert('Livro atualizado com sucesso!');
-          this.$router.push('/listalivro');  // Redireciona para a lista de livros após salvar
-        } catch (error) {
-          console.error('Erro ao atualizar livro:', error);
-          alert('Erro ao atualizar o livro.');
-        }
-      },
+      } catch (error) {
+        console.error('Erro ao buscar dados do livro:', error);
+        alert('Erro ao carregar os dados do livro');
+      }
     },
-  };
-  </script>
-  
+    formatImagePath(path) {
+      // Corrige as barras e adiciona o caminho completo da URL
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    },
+
+    
+
+    handleFileUpload(event) {
+      this.book.image = event.target.files[0];      
+    },
+
+    async enviarFormulario() {
+      const formData = new FormData();
+      formData.append('code', this.book.code);
+      formData.append('title', this.book.title);
+      formData.append('author', this.book.author);
+      formData.append('year', this.book.year);
+      formData.append('gender', this.book.gender);
+      formData.append('amount', this.book.amount);
+      formData.append('description', this.book.description);
+
+      if (this.book.image) {
+        formData.append('image', this.book.image);
+      }
+
+      try {
+        const response = await axios.put(`http://localhost:3000/api/books/${this.book.code}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+
+        console.log('Livro atualizado:', response.data);
+        alert('Livro atualizado com sucesso!');
+        this.$router.push('/listalivro');
+      } catch (error) {
+        console.error('Erro ao atualizar livro:', error);
+        alert('Erro ao atualizar o livro.');
+      }
+    },
+  },
+};
+</script>
