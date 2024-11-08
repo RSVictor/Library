@@ -78,7 +78,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/PerfilVistaADM',
+    path: '/PerfilVistaADM/:id',
     name: 'PerfilVistaADM',
     component: () => import('../views/PerfilVistaAdmPage.vue'),
     meta: { requiresAuth: true }

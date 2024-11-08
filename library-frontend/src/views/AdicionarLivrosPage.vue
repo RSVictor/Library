@@ -20,7 +20,7 @@
                 <div class="dados  mt-2">
                     <div class="foto-botao">
                         <div class="img-foto">
-                            <img src="#" alt="" style="width: 300px;">
+                            <img :src="formatImagePath(book.image)" alt="" style="width: 300px;" v-if="book">
 
                         </div>
 
@@ -117,7 +117,7 @@ export default {
     },
     methods: {
         handleFileUpload(event) {
-            this.coverImage = event.target.files[0];
+            this.image = event.target.files[0];
         },
         async enviarFormulario() {
             const formData = new FormData();
@@ -146,6 +146,11 @@ export default {
                 alert('Erro ao cadastrar o livro.');
             }
         },
+        formatImagePath(path) {
+      // Corrige as barras e adiciona o caminho completo da URL
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    }
     },
+
 };
 </script>

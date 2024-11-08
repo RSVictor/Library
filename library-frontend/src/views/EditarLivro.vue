@@ -36,8 +36,6 @@
                         </form>
                     </div>
 
-
-
                     <form @submit.prevent="enviarFormulario">
                         <div class="form-adicionar mt-3">
                             <label for="floatingInput">Código ISBN:</label>

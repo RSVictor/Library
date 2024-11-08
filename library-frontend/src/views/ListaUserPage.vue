@@ -45,7 +45,7 @@
             <RouterLink :to="`/PerfilVistaADM/${user._id}`" class="button-link"><i class="bi bi-person-fill-add"></i></RouterLink>
           </div>
           <div class="button-editar-adm">
-            <button class="button-link"><i class="bi bi-person-fill-slash"></i></button> 
+            <RouterLink  class="button-link"><i class="bi bi-person-fill-slash"></i></RouterLink> 
           </div>
         </div>
       </div>
@@ -87,6 +87,10 @@ export default {
         console.error('Erro ao buscar usuários:', error);
       }
     },
-  }  
+    verPerfil(id) {
+      // Redireciona para a perfilVistaAdm
+      this.$router.push(`/PerfilVistaADM/${id}`);
+    }
+  }   
 };
 </script>

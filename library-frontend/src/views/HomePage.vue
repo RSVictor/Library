@@ -27,7 +27,7 @@
       <div class="col-3">
         <div class="card mt-3">
           <router-link to="/descricao">
-            <img src="#" class="card-img-top mt-2" alt="Programador Autodidata">
+            <img :src="formatImagePath(book.image)"  class="card-img-top mt-2" alt="Programador Autodidata">
           </router-link>
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>
@@ -181,5 +181,22 @@ export default {
 
     return { handleEmprestar };
   },
+  methods: {
+    fetchBooks() {
+      booksService.getBooks().then(response => {
+        this.books = response.data;
+      });
+    },
+    applyFilter() {
+      // Aplica a pesquisa no filtro
+      this.searchApplied = this.searchQuery;
+    },
+    formatImagePath(path) {
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    },
+    goToNextPage() {
+    }
+  }
 };
+
 </script>

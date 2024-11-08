@@ -33,7 +33,7 @@
 
     <div  v-for="book in books" :key="book._id" class="lista-adm mt-2">
       <!-- Renderizando-->
-      <div class="text-lista">{{ book.code }}</div>
+      <div class="text-lista">{{ book.customId }}</div>
       <div class="text-lista">{{ book.title }}</div>
       <div class="text-lista">{{ book.author }}</div>
       <div class="text-lista">{{ book.gender }}</div>
