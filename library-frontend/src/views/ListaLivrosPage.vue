@@ -15,14 +15,14 @@
         <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
       </div>
       <div class="input-adm">
-        <input type="text" name="" id="" placeholder="Pesquisar livros">
+        <input type="text" name="" id="" placeholder="Pesquisar livros" v-model="searchQuery">
         <button><i class="bi bi-search"></i></button>
       </div>
     </div>
 
 
     <div class="titulo-adm mt-5">
-      <div class="text-emp">ISBN</div>
+      <div class="text-emp">Id</div>
       <div class="text-emp">Título</div>
       <div class="text-emp">Autor</div>
       <div class="text-emp">Gênero</div>
@@ -62,10 +62,19 @@ export default {
   data() {
     return {
       books: [],
+      searchQuery: '',   // Para pesquisa de livros
     };
   },
   mounted() {
     this.fetchBooks();
+  },
+  computed: {
+    // Computed para filtrar usuários conforme a pesquisa
+    filteredUsers() {
+      return this.users.filter(user => {
+        return user.username.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    }
   },
   methods: {
     async fetchBooks() {

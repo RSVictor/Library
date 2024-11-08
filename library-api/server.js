@@ -41,6 +41,8 @@ app.use('/api/books', booksRoutes);
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
 
 const PORT = process.env.PORT || 3000;
