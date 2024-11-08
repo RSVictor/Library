@@ -32,6 +32,19 @@ module.exports = (upload) => {
         }
     });
 
+    // Rota para buscar um livro específico pelo ID (GET)
+    router.get('/:id', async (req, res) => {
+        try {
+            const book = await Book.findById(req.params.id); // Buscar livro pelo ID
+            if (!book) {
+                return res.status(404).json({ message: 'Livro não encontrado' });
+            }
+            res.status(200).json(book);  // Retorna o livro encontrado
+        } catch (error) {
+            res.status(500).json({ message: 'Erro ao buscar o livro', error });
+        }
+    });
+
     // Rota para atualizar um livro pelo ID (PUT)
     router.put('/:id', async (req, res) => {
         const { code, title, author, year, gender, amount, description, image } = req.body;

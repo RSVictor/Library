@@ -27,7 +27,7 @@
       <div class="col-3">
         <div class="card mt-3">
           <router-link to="/descricao">
-            <img :src="formatImagePath(book.image)"  class="card-img-top mt-2" alt="Programador Autodidata">
+            <img src="" class="card-img-top mt-2" alt="Programador Autodidata">
           </router-link>
           <div class="card-body">
             <h5 class="card-title">Programador Autodidata</h5>

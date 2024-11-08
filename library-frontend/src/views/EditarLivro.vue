@@ -1,93 +1,74 @@
 <template>
-    <div class="container">
-        <div class="user">
-            <p>Bem vindo, Usuario!</p>
-        </div>
-
-
-
-
-        <div class="titulo-emp">
-
-            <span>Editar livro</span>
-        </div>
-
-
-        <div class="teste">
-            <div class="perfil-adicionar mt-3">
-
-
-                <div class="dados  mt-2">
-                    <div class="foto-botao">
-                        <div class="img-foto" v-if="book.image">                         
-                            <img :src="formatImagePath(book.image)" alt="" style="width: 300px;">
-                        </div>
-
-                      
-                        <form @submit.prevent="enviarFormulario">
-                            <div class="button-foto mt-3" >
-                                <label for="fileInput" class="custom-file-upload " style="cursor: pointer;">
-                                    Alterar Capa
-                                </label>
-                                <input type="file" id="fileInput" style="display: none; " @change="handleFileUpload">
-
-                            </div>
-
-                        </form>
-                    </div>
-
-                    <form @submit.prevent="enviarFormulario">
-                        <div class="form-adicionar mt-3">
-                            <label for="floatingInput">Código ISBN:</label>
-                            <input type="text" class="form-control" v-model="book.code" readonly />
-
-
-                            <label for="floatingInput">Título:</label>
-                            <input type="text" class="form-control"  v-model="book.title">
-
-                            <label for="floatingInput">Autor:</label>
-                            <input type="text" class="form-control"  v-model="book.author">
-
-                            <label for="floatingInput">Ano de pulblicação:</label>
-                            <input type="number" class="form-control"  v-model="book.year">
-
-                            <label for="floatingInput">Gênero:</label>
-                            <input type="text" class="form-control" v-model="book.gender">
-
-                            <label for="floatingInput">Quantidade:</label>
-                            <input type="number" class="form-control"  v-model="book.amount">
-
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-        <form @submit.prevent="enviarFormulario">
-            <div class="caixa mt-5">
-                <div class="form-descricao ">
-                    <label for="floatingInput">Descrição:</label>
-                    <input type="text" class="form-control" id="floatingInput" style="height: 150px;"
-                        v-model="description">
-
-
-                    <div class="button-perfil-user mt-5">                        
-                        <div class="button-salvar">
-                            <router-link to="/listalivro" class="button-link" @click="enviarFormulario">
-                                <i class="bi bi-check2-square"></i>
-                                <span class="button-text">Salvar</span>
-                            </router-link>
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-        </form>
+  <div class="container">
+    <div class="user">
+      <p>Bem-vindo, Usuário!</p>
     </div>
 
+    <div class="titulo-emp">
+      <span>Editar livro</span>
+    </div>
+
+    <div class="teste">
+      <div class="perfil-adicionar mt-3">
+        <div class="dados mt-2">
+          <div class="foto-botao">
+            <div class="img-foto" v-if="book.image">
+              <img :src="formatImagePath(book.image)" alt="Capa do livro" style="width: 300px;">
+            </div>
+
+            <form @submit.prevent="enviarFormulario">
+              <div class="button-foto mt-3">
+                <label for="fileInput" class="custom-file-upload" style="cursor: pointer;">
+                  Alterar Capa
+                </label>
+                <input type="file" id="fileInput" style="display: none;" @change="handleFileUpload">
+              </div>
+            </form>
+          </div>
+
+          <form @submit.prevent="enviarFormulario">
+            <div class="form-adicionar mt-3">
+              <label for="floatingInput">Código ISBN:</label>
+              <input type="text" class="form-control" v-model="book.code" readonly />
+
+              <label for="floatingInput">Título:</label>
+              <input type="text" class="form-control" v-model="book.title" />
+
+              <label for="floatingInput">Autor:</label>
+              <input type="text" class="form-control" v-model="book.author" />
+
+              <label for="floatingInput">Ano de publicação:</label>
+              <input type="number" class="form-control" v-model="book.year" />
+
+              <label for="floatingInput">Gênero:</label>
+              <input type="text" class="form-control" v-model="book.gender" />
+
+              <label for="floatingInput">Quantidade:</label>
+              <input type="number" class="form-control" v-model="book.amount" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <form @submit.prevent="enviarFormulario">
+      <div class="caixa mt-5">
+        <div class="form-descricao">
+          <label for="floatingInput">Descrição:</label>
+          <input type="text" class="form-control" id="floatingInput" style="height: 150px;" v-model="book.description" />
+
+          <div class="button-perfil-user mt-5">
+            <div class="button-salvar">
+              <router-link to="/listalivro" class="button-link" @click="enviarFormulario">
+                <i class="bi bi-check2-square"></i>
+                <span class="button-text">Salvar</span>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -131,14 +112,11 @@ export default {
       }
     },
     formatImagePath(path) {
-      // Corrige as barras e adiciona o caminho completo da URL
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
     },
 
-    
-
     handleFileUpload(event) {
-      this.book.image = event.target.files[0];      
+      this.book.image = event.target.files[0];
     },
 
     async enviarFormulario() {
