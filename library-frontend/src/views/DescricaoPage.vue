@@ -24,11 +24,10 @@
       </div>
 
       <div class="container desc p-4 mt-3">
-        <div class="card" style="width: 15rem;">
+        <div class="card" style="width: 15rem; min-height: 300px;">
           <img v-if="book && book.image" :src="formatImagePath(book.image)" class="card-img-top" alt="Imagem do Livro" style="width: 100%; height: 100%;">
           <p v-else>Imagem não disponível</p>
-          <button class="btn btn-primary mt-3" style="background-color: #335844; border: none;"
-            @click="handleEmprestar">Emprestar</button>
+          <button class="btn btn-primary mt-3" style="background-color: #335844; border: none; margin-top: 10px;" @click="handleEmprestar">Emprestar</button>
         </div>
 
         <div class="descricao p-8">
