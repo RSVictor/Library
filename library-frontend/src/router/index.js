@@ -21,10 +21,10 @@ const routes = [
     
   },
   {
-    path: '/descricao',
+    path: '/descricao/:id',
     name: 'descricao',
     component: () => import('../views/DescricaoPage.vue'),
-    
+    props: true,  // Isso permite que o parâmetro `id` seja passado como prop para o componente
   },
   {
     path: '/emprestimo',

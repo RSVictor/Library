@@ -40,6 +40,10 @@ export const booksService = {
     addBook(book) {
         return booksApiClient.post('/', book); // Adiciona um novo livro
     },
+    fetchBookById(id) {
+        console.log(`Buscando livro com ID: ${id}`);
+        return booksApiClient.get(`/${id}`).then(response => response.data);
+    },
     updateBook(id, book) {
         return booksApiClient.put(`/${id}`, book); // Atualiza um livro existente
     },

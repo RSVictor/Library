@@ -24,19 +24,23 @@
       </div>
 
       <span>Livros</span>
-      <div class="col-3">
-        <div class="card mt-3" v-for="book in paginatedBooks" :key="book._id"   >
-          <router-link :to="{ name: 'descricao', params: { id: book._id } }" >
-            <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="">
-          </router-link>
+      <div class="row flex-wrap">
+        <!-- Cada livro estará em linha -->
+        <div class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 mb-3" v-for="book in paginatedBooks" :key="book._id">
+          
+          <div class="card">
+            <router-link :to="{ name: 'descricao', params: { id: book._id } }">
+              <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
+            </router-link>
 
-          <div class="card-body">
-            <h5 class="card-title">{{ book.title }}</h5>
-            <div class="button">
-              <button class="btn btn-primary" style="background-color: #335844;border: none; height: 40px"
-                @click="handleEmprestar">Emprestar</button>
-              <router-link to="/favoritos" class="btn btn-primary"
-                style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
+            <div class="card-body">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <div class="button">
+                <button class="btn btn-primary" style="background-color: #335844; border: none; height: 40px"
+                  @click="handleEmprestar">Emprestar</button>
+                <router-link to="/favoritos" class="btn btn-primary"
+                  style="background-color: #F4D94C; height: 40px; border: none;"><i class="bi bi-heart"></i></router-link>
+              </div>
             </div>
           </div>
         </div>
