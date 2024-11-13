@@ -5,8 +5,6 @@
         </div>
 
 
-
-
         <div class="titulo-emp">
 
             <span>Adicionar livro</span>
@@ -103,8 +101,8 @@
 import axios from 'axios';
 
 export default {
-    data() {
-        return {
+  data() {
+    return {
             code: '',
             title: '',
             author: '',
@@ -114,43 +112,39 @@ export default {
             description: '',
             image: null,
         };
+  },
+  methods: {
+    handleFileUpload(event) {
+      this.coverImage = event.target.files[0];
     },
-    methods: {
-        handleFileUpload(event) {
-            this.image = event.target.files[0];
-        },
-        async enviarFormulario() {
-            const formData = new FormData();
-            formData.append('code', this.code);
-            formData.append('title', this.title);
-            formData.append('author', this.author);
-            formData.append('year', this.year);
-            formData.append('gender', this.gender);
-            formData.append('amount', this.amount);
-            formData.append('description', this.description);
-            if (this.image) {
-                formData.append('image', this.image);
-            }
-
-            try {
-                const response = await axios.post('http://localhost:3000/api/books', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-                console.log('Livro adicionado:', response.data);
-                alert('Livro cadastrado com sucesso!');
-                this.$router.push('/listalivro');
-            } catch (error) {
-                console.error('Erro ao adicionar livro:', error);
-                alert('Erro ao cadastrar o livro.');
-            }
-        },
-        formatImagePath(path) {
-      // Corrige as barras e adiciona o caminho completo da URL
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    async enviarFormulario() {
+        const formData = new FormData();
+    formData.append('code', this.code);
+    formData.append('title', this.title);
+    formData.append('author', this.author);
+    formData.append('year', this.year);
+    formData.append('gender', this.gender);
+    formData.append('amount', this.amount);
+    formData.append('description', this.description);
+    if (this.image) {
+        formData.append('image', this.image);
     }
-    },
 
+      try {
+        const response = await axios.post('http://localhost:3000/api/books', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log('Livro adicionado:', response.data);
+        alert('Livro cadastrado com sucesso!');
+        this.$router.push('/listalivros');
+      } catch (error) {
+        console.error('Erro ao adicionar livro:', error);
+        alert('Erro ao cadastrar o livro.');
+      }
+    },
+   
+  },
 };
 </script>
