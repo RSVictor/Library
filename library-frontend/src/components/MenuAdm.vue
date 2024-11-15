@@ -23,10 +23,10 @@
             <img src="#" alt="" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-           
-            <li><RouterLink to="/listalivro" class="dropdown-item">Livros</RouterLink></li>
+            <li><RouterLink to="/homeADM" class="dropdown-item">Home</RouterLink></li> 
+            <li><RouterLink to="/listalivro" class="dropdown-item">Lista livros</RouterLink></li>
             <li><RouterLink to="/adicionarLivro" class="dropdown-item">Adicionar livro</RouterLink></li>
-            <li><RouterLink to="/listaUser" class="dropdown-item">Usuários</RouterLink></li>           
+            <li><RouterLink to="/listaUser" class="dropdown-item">Lista usuários</RouterLink></li>           
             <li><hr class="dropdown-divider"></li>
             <li><button class="dropdown-item" @click="logout">Logout</button></li>
           </ul>

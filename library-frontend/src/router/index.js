@@ -9,6 +9,11 @@ const routes = [
     component: HomePage
   },
   {
+    path: '/homeADM',
+    name: 'homeADM',
+    component: () => import('../views/HomePageADM.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginPage.vue')
@@ -24,6 +29,12 @@ const routes = [
     path: '/descricao/:id',
     name: 'descricao',
     component: () => import('../views/DescricaoPage.vue'),
+    props: true,  // Isso permite que o parâmetro `id` seja passado como prop para o componente
+  },
+  {
+    path: '/descricaoADM/:id',
+    name: 'descricaoADM',
+    component: () => import('../views/DescriçãoADM.vue'),
     props: true,  // Isso permite que o parâmetro `id` seja passado como prop para o componente
   },
   {
