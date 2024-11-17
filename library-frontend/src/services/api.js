@@ -69,6 +69,26 @@ export const userService = {
     },
 };
 
+
+// Função para buscar os livros mais buscados da API
+const fetchMostSearchedBooks = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/books/most-searched');
+    mostSearchedBooks.value = response.data; // Atualiza o estado com os livros mais buscados
+  } catch (error) {
+    console.error('Erro ao buscar livros mais buscados', error);
+  }
+};
+
+// Função para registrar a visualização de um livro
+const incrementSearchCount = async (bookId) => {
+  try {
+    await axios.post(`http://localhost:3000/api/books/viewed/${bookId}`);
+  } catch (error) {
+    console.error('Erro ao registrar busca', error);
+  }
+};
+
   
 
 // Exporta os clientes de API para uso em outros módulos

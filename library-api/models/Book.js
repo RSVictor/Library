@@ -13,6 +13,8 @@ gender: { type: String, required: true},
 amount: { type: Number},
 description:{ type: String, required: true},
 image: { type: String }, 
+searchCount: { type: Number, default: 0, }, // Inicia a contagem de buscas em 0
+  
 });
 // exportando o modelo para salvar os livros
 

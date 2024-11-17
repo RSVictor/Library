@@ -8,20 +8,37 @@
       <span>Sua lista de favoritos</span>
     </div>
 
-    <div class="fav-item mt-3">
-      <span>Você tem 1 item</span>
+    <div v-if="favorites.length" class="fav-item mt-3">
+      <span>Você tem {{ favorites.length }} item(s) na sua lista de favoritos.</span>
     </div>
 
-    <div class="card-fav mt-5">
-      <router-link to="/descricao">
-        <img src="#" class="card-img-top mt-2" alt="...">
-      </router-link>
-      <div class="card-body mt-4">
-        <h5 class="card-title">Java guia do Programador</h5>
+    <div class="mt-5" v-else>
+      <span>Você não tem favoritos ainda.</span>
+    </div>
+
+    <div class="row flex-wrap" style="gap: 20px;">
+      <div 
+        class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 mb-3 card-fav mt-5" 
+        v-for="book in favorites" 
+        :key="book._id">
+        
+        <router-link :to="{ name: 'descricao', params: { id: book._id } }">
+          <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
+        </router-link>
+        
+        <div class="card-body mt-4">
+          <h5 class="card-title">{{ book.title }}</h5>
+          
+          <!-- Botão para remover o livro -->
+          <button 
+            class="btn btn-primary mt-3" 
+            style="width: 80px; background-color: red; border: none;" 
+            @click="removeFromFavorites(book)">
+            <i class="bi bi-trash"></i> 
+          </button>
+        </div>
       </div>
     </div>
-
-
 
     <div class="button-favorito mt-5">
       <div class="button-salvar">
@@ -30,44 +47,37 @@
           <span class="button-text">Adicionar</span>
         </router-link>
       </div>
-      <div class="button-excluir">
-        <router-link to="#" class="button-link">
-          <i class="bi bi-x-lg"></i>
-          <span class="button-text">Cancelar</span>
-        </router-link>
-      </div>
-      <div class="button-salvar">
-        <router-link to="/emprestimo" class="button-link">
-          <i class="bi bi-check-lg"></i>
-          <span class="button-text">Emprestar</span>
-        </router-link>
-      </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
-import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useFavoriteStore } from '../stores/favoriteStore'; // Importe a store de favoritos
 import { useRouter } from 'vue-router';
 
 export default {
   setup() {
-    const authStore = useAuthStore();
+    const favoriteStore = useFavoriteStore();  // Usando a store de favoritos
     const router = useRouter();
 
-    const handleEmprestar = () => {
-      if (!authStore.isLoggedIn) {
-        alert('Você precisa fazer login para emprestar um livro.');
-        router.push('/login');
-      } else {
-        // Redireciona para a página de empréstimo
-        router.push('/historico');
-      }
+    // Lista reativa de favoritos
+    const favorites = favoriteStore.favorites;
+
+    // Função para remover o livro da lista de favoritos
+    const removeFromFavorites = (book) => {
+      favoriteStore.removeFromFavorites(book);  // Chama o método da store para remover
     };
 
-    return { handleEmprestar };
+
+
+    return { favorites, removeFromFavorites };
   },
+
+  methods: {
+    // Método para formatar o caminho da imagem
+    formatImagePath(path) {
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    }
+  }
 };
 </script>

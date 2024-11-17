@@ -125,6 +125,39 @@ module.exports = (upload) => {
         }
     });
 
+    // Endpoint para registrar a visualização de um livro
+    router.post('/viewed/:id', async (req, res) => {
+        try {
+            const book = await Book.findById(req.params.id);
+            if (!book) {
+                return res.status(404).json({ message: "Livro não encontrado" });
+            }
+            // Incrementa a contagem de buscas
+            book.searchCount += 1;
+            await book.save();
+        
+            res.json(book); // Retorna o livro atualizado
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    });
+  
+    // Endpoint para retornar os livros mais buscados
+    router.get('/most-searched', async (req, res) => {
+        try {
+            console.log('Buscando livros mais buscados...');
+    
+            const books = await Book.find().sort({ searchCount: -1 }).limit(10);
+            console.log('Livros mais buscados:', books);
+    
+            res.json(books);
+        } catch (err) {
+            console.error('Erro ao buscar livros mais buscados:', err);
+            res.status(500).json({ message: err.message });
+        }
+    });
+    
+
     // Retorne o router configurado
     return router;
 };
