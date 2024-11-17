@@ -14,7 +14,7 @@
             <div class="foto-botao">
               <div class="img-foto">
                 <!-- Exibe a imagem se imagePreview não for nula -->
-                <img v-if="imagePreview" :src="imagePreview" alt="Capa do livro" style="width: 300px;">
+                <img v-if="imagePreview" :src="imagePreview" alt="Capa do livro" style="width: 250px;">
               </div>
   
               <form @submit.prevent="enviarFormulario">

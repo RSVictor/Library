@@ -24,6 +24,7 @@
       <p v-if="message" class="text-danger">{{ message }}</p>
 
       <button class="btn text-bg-success w-100 mt-2 py-2" type="submit">Cadastrar</button>
+      <p class="mt-1 mb-3 text-body-secondary">Já é cadastrado?<router-link class="mt-1 text-success" style="text-decoration: none;" to="/login"> Logar</router-link></p>
     </form>
   </main>
 </template>

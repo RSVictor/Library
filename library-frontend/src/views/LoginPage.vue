@@ -12,7 +12,7 @@
       </div>
       <p v-if="message" class="text-danger">{{ message }}</p>
       <button class="btn text-bg-success w-100 mt-2 py-2" type="submit">Entrar</button>
-      <p class="mt-1 mb-3 text-body-secondary">Não tem conta?<router-link to="/cadastro">Cadastre-se</router-link></p>
+      <p class="mt-1 mb-3 text-body-secondary" >Não tem conta?<router-link class="mt-1 text-success" style="text-decoration: none;" to="/cadastro"> Cadastre-se</router-link></p>
     </form>
   </main>
 </template>
