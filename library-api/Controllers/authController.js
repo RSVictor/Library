@@ -2,11 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
-require("dotenv").config(); /// Não
-// Middleware to parse URL-encoded bodies (optional, but useful for form submissions)
-//app.use(express.urlencoded({ extended: true }));
-
-// Your routes here
+require("dotenv").config(); 
 
 // Função para registrar novos usuários
 exports.register = async (req, res) => {
@@ -35,7 +31,6 @@ exports.register = async (req, res) => {
 // Função para fazer login de usuários
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         // Busca usuário pelo email
         const user = await User.findOne({ email });
