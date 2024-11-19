@@ -17,25 +17,40 @@
 
 }
 
-.circle {
-    font-size: 15px;
-    display: flex;
-    color: white;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;   
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
+/* Estilo para o container das "circles" */
+.circulos {
+  display: flex;
+  flex-wrap: wrap;    /* Permite que os círculos se movam para a próxima linha */
+  justify-content: center;  /* Centraliza os itens na linha */
+  gap: 10px;         /* Espaçamento entre os círculos */
 }
 
-.circulos {
-    width: 933px;
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+/* Estilo para cada círculo */
+.circle {
+  width: 140px;      /* Tamanho fixo dos círculos */
+  height: 140px;     /* Tamanho fixo dos círculos */
+  border-radius: 50%;  /* Torna os elementos circulares */
+  display: flex;
+  justify-content: center;  /* Centraliza o conteúdo dentro do círculo */
+  align-items: center;     /* Alinha o conteúdo verticalmente */
+  color: white;          /* Cor do texto */
+  text-align: center;    /* Alinha o texto dentro do círculo */
+  font-size: 14px;       /* Tamanho da fonte */
+}
 
+/* Responsividade */
+@media (max-width: 768px) {
+  .circle {
+    width: 80px;     /* Diminui o tamanho dos círculos em telas pequenas */
+    height: 80px;    /* Diminui o tamanho dos círculos em telas pequenas */
+  }
+}
+
+@media (max-width: 480px) {
+  .circle {
+    width: 60px;     /* Diminui ainda mais os círculos em telas muito pequenas */
+    height: 60px;    /* Diminui ainda mais os círculos em telas muito pequenas */
+  }
 }
 
 .bd-placeholder-img {
@@ -1000,3 +1015,28 @@ font-size: 14px;
     margin: 0 5px;
     
 }
+/* Botões home*/
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Alinha os botões à direita */
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 20px; /* Espaçamento opcional, ajuste conforme necessário */
+    
+  }
+  
+  .pagination button{
+    background-color:#335844;
+    color: white;
+    border-radius: 10px;
+    border-style: none;
+  }
+  .pagination span {
+    padding: 5px 10px;
+    font-size: 12px;
+    
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.5; /* Torna os botões desabilitados visualmente mais claros */
+  }

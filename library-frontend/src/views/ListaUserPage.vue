@@ -1,5 +1,3 @@
-lista user 
-
 <template>
   <div class="container">
     <!-- Seção do usuário -->
@@ -40,7 +38,7 @@ lista user
     </div>
 
     <!-- Exibindo lista de usuários -->
-    <div v-for="user in filteredUsers" :key="user._id" class="lista-adm mt-2">
+    <div v-for="user in paginatedUsers" :key="user._id" class="lista-adm mt-2">
       <div class="text-lista">{{ user.customId }}</div>
       <div class="text-lista">{{ user.username }}</div>
       <div class="text-lista">{{ user.email }}</div>
@@ -56,7 +54,7 @@ lista user
           </div>
           <!-- Botão de bloquear -->
           <div class="button-editar-adm">
-            <button class="button-editar-adm" @click="blockUser(user)">
+            <button class="button-editar-adm" style="border: none;" @click="blockUser(user)">
               <i class="bi bi-person-fill-slash"></i>
             </button>
           </div>
@@ -64,9 +62,15 @@ lista user
       </div>
     </div>
 
+    <!-- Paginação -->
+    <div class="pagination">
+      <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
+    </div>
+
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -76,19 +80,64 @@ export default {
     return {
       users: [],           // Lista de usuários
       searchQuery: '',     // Para pesquisa de usuários
-      filteredUsers: []    // Lista filtrada de usuários conforme a pesquisa
+      filteredUsers: [],   // Lista filtrada de usuários conforme a pesquisa
+      currentPage: 1,      // Página atual
+      usersPerPage: 10     // Número de usuários por página
     };
   },
   mounted() {
     this.fetchUsers();   // Carregar usuários ao montar o componente
   },
+
+  computed: {
+    // Aplica a filtragem e paginação
+    paginatedUsers() {
+      // Filtra os usuários com base na pesquisa
+      const filteredUsers = this.users.filter(user => {
+        return user.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+               user.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+               user.status.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+
+      // Aplica a paginação
+      const start = (this.currentPage - 1) * this.usersPerPage;
+      const end = start + this.usersPerPage;
+
+      return filteredUsers.slice(start, end);  // Retorna os usuários para a página atual
+    },
+
+    // Calcula o número total de páginas
+    totalPages() {
+      // Filtra os usuários com base na pesquisa
+      const filteredUsers = this.users.filter(user => {
+        return user.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+               user.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+               user.status.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+      return Math.ceil(filteredUsers.length / this.usersPerPage); // Número de páginas
+    }
+  },
+
   methods: {
+    // Função para ir para a próxima página
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
+    // Função para ir para a página anterior
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
     // Método para buscar usuários
     async fetchUsers() {
       try {
         const response = await axios.get('http://localhost:3000/admin/api/users');
         this.users = response.data;
-        this.filteredUsers = this.users; // Inicializa a lista de usuários filtrados
       } catch (error) {
         console.error('Erro ao buscar usuários:', error);
       }
@@ -96,24 +145,18 @@ export default {
     
     // Método para filtrar usuários com base no que é digitado na pesquisa
     filterUsers() {
-      this.filteredUsers = this.users.filter(user => {
-        return user.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               user.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               user.status.toLowerCase().includes(this.searchQuery.toLowerCase());
-      });
+      // A filtragem já está sendo feita no `computed`, então não há necessidade de sobrescrever aqui.
     },
 
     // Método para bloquear o usuário
     async blockUser(user) {
       try {
-        // Atualizar o status do usuário para "inativo" no servidor
         const response = await axios.patch(`http://localhost:3000/admin/api/users/${user._id}`, {
           status: 'inativo'  // Altera o status para "inativo"
         });
 
         if (response.status === 200) {
-          // Atualiza a lista local de usuários com o novo status
-          user.status = 'inativo';
+          user.status = 'inativo';  // Atualiza o status localmente
           alert('Usuário bloqueado com sucesso!');
         }
       } catch (error) {
@@ -129,3 +172,18 @@ export default {
   }   
 };
 </script>
+
+<style scoped>
+.text-danger {
+  color: red;
+  font-size: 0.9em;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination button {
+  margin: 0 10px;
+}
+</style>

@@ -50,9 +50,17 @@
           </div>
         </div>
       </div>
-    
+        <!-- Botões de navegação -->
+      <div class="pagination">
+      <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
+    </div>
     </div>
   </div>
+ 
+  
+  
 </template>
 
 <script>
@@ -82,15 +90,24 @@ export default {
     const end = start + this.booksPerPage;
 
     return filteredBooks.slice(start, end);
-  },
+  },paginatedBooks() {
+  const filteredBooks = this.books.filter((book) => 
+    book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+  );
+
+  const start = (this.currentPage - 1) * this.booksPerPage;
+  const end = start + this.booksPerPage;
+
+  return filteredBooks.slice(start, end); // Retorna os livros filtrados e paginados
+},
   // Calcula o total de páginas
   totalPages() {
-    const filteredBooks = this.books.filter((book) => 
-      book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-    return Math.ceil(filteredBooks.length / this.booksPerPage);
-  }
+  const filteredBooks = this.books.filter((book) => 
+    book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+  );
+  return Math.ceil(filteredBooks.length / this.booksPerPage); // Retorna o número total de páginas
 },
+  },
 
   setup() {
     const authStore = useAuthStore();
@@ -144,15 +161,15 @@ export default {
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
     },
     goToNextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
-    goToPreviousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
-    }
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+  }
+},
+goToPreviousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
   },
   mounted() {
     this.fetchBooks();

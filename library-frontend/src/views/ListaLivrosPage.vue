@@ -56,6 +56,12 @@
         </div>
       </div>
     </div>
+    <!-- Botões de navegação -->
+<div class="pagination">
+  <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
+  <span>{{ currentPage }} / {{ totalPages }}</span>
+  <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
+</div>
 
   </div>
 </template>
@@ -67,22 +73,54 @@ export default {
   data() {
     return {
       books: [],             // Armazena todos os livros
-      searchQuery: '',       // Armazena a consulta de pesquisa
+      searchQuery: '',       // Termo de pesquisa
+      currentPage: 1,        // Página atual
+      booksPerPage: 10,      // Número de livros por página
     };
   },
   mounted() {
-    this.fetchBooks();
+    this.fetchBooks();  // Chama a função para buscar livros quando o componente for montado
   },
+
   computed: {
-    // Computed para filtrar livros conforme o nome da pesquisa
+    // Filtra os livros com base na pesquisa e aplica a paginação
     filteredBooks() {
-      // Filtra a lista de livros com base na pesquisa (título do livro)
-      return this.books.filter(book => {
+      // Filtra os livros com base na pesquisa
+      const filteredBooks = this.books.filter(book => {
         return book.title.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
+
+      // Aplica a paginação
+      const start = (this.currentPage - 1) * this.booksPerPage;
+      const end = start + this.booksPerPage;
+
+      return filteredBooks.slice(start, end);  // Retorna os livros para a página atual
+    },
+
+    // Calcula o número total de páginas
+    totalPages() {
+      const filteredBooks = this.books.filter(book => {
+        return book.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+      return Math.ceil(filteredBooks.length / this.booksPerPage); // Número de páginas
     }
   },
+
   methods: {
+    // Função para ir para a próxima página
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
+    // Função para ir para a página anterior
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
     // Função para buscar todos os livros do servidor
     async fetchBooks() {
       try {
@@ -106,10 +144,11 @@ export default {
           alert('Erro ao excluir o livro.');
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
+
 
 <style scoped>
 .text-danger {
