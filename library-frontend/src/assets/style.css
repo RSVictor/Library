@@ -18,15 +18,16 @@
 }
 
 .circle {
-    font-size: 15px;
+    font-size: 14px;
     display: flex;
     color: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;   
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
+    
 }
 
 .circulos {
@@ -34,7 +35,7 @@
     height: 100px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;   
 
 }
 
@@ -679,7 +680,7 @@ display: flex;
 flex-direction: row; 
 align-items: center;   
 justify-content: center;
-width: 120px;
+width: 160px;
 height: 35px;    
 background-color: #335844;
 border-radius: 10px;   
@@ -1000,3 +1001,44 @@ font-size: 14px;
     margin: 0 5px;
     
 }
+
+.pagination {
+    display: flex; /* Utiliza flexbox para alinhar os elementos */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Alinha verticalmente */
+    gap: 10px; /* Adiciona espaçamento entre os elementos */
+    margin: 20px 0; /* Espaçamento superior e inferior para melhorar o layout */
+  }
+  
+  .pagination button {
+    padding: 8px 8px; /* Tamanho dos botões */
+    background-color: #93BFA7; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remove bordas */
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer; /* Muda o cursor para pointer ao passar por cima */
+    font-size: 16px; /* Tamanho da fonte */
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc; /* Cor do botão desativado */
+    cursor: not-allowed; /* Cursor de não permitido para botões desativados */
+  }
+  
+  .pagination span {
+    font-size: 16px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+  }
+  
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .dashboard {
+        width: 90%; /* Ajusta largura para telas menores */
+        padding: 15px; /* Reduz padding para dispositivos pequenos */
+    }
+}
+
+

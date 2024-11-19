@@ -48,7 +48,7 @@ export default {
         if (response.data.permissions === 'Usuario') {
           this.$router.push('/'); // Redireciona para a página do usuário
         } else if (response.data.permissions === 'ADM') {
-          this.$router.push('/listalivro'); // Redireciona para a página de administrador
+          this.$router.push('/dashboard'); // Redireciona para a página de administrador
         } else {
           this.message = 'Permissão desconhecida!';
         }

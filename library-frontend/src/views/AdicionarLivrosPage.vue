@@ -73,7 +73,7 @@
   
             <div class="button-perfil-user mt-5">
               <div class="button-excluir">
-                <router-link to="/listalivro" class="button-link">
+                <router-link to="/dashboard" class="button-link">
                   <i class="bi bi-x-lg"></i>
                   <span class="button-text">Cancelar</span>
                 </router-link>
@@ -183,7 +183,7 @@
   });
   console.log('Livro adicionado:', response.data);
   alert('Livro cadastrado com sucesso!');
-  this.$router.push('/listalivro');
+  this.$router.push('/dashboard');
 } catch (error) {
   console.error('Erro ao adicionar livro:', error.response ? error.response.data : error);
   alert('Erro ao cadastrar o livro: ' + (error.response ? error.response.data.message : 'Erro desconhecido.'));

@@ -8,11 +8,12 @@
     <!-- Menu de navegação -->
     <div class="titulo-adm-button">
       <div class="button-adm">
-        <RouterLink to="/listalivro">Livros</RouterLink>
+        <RouterLink to="/dashboard">Dashboard</RouterLink>
       </div>
       <div class="button-adm">
-        <RouterLink to="/listaUser">Usuários</RouterLink>
+        <RouterLink to="/listalivro">Livros</RouterLink>
       </div>
+     
       <div class="button-adm">
         <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
       </div>

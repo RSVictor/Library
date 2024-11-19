@@ -83,6 +83,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/Dashboard.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/historicoADM',
     name: 'historicoADM',
     component: () => import('../views/HistoricoVistaAdm.vue'), // Ajuste para o componente correto
