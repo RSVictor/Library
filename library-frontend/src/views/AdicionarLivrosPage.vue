@@ -67,8 +67,8 @@
       <form @submit.prevent="enviarFormulario">
         <div class="caixa mt-5">
           <div class="form-descricao">
-            <label for="floatingInput">Descrição:</label>
-            <input type="text" class="form-control" style="height: 150px;" v-model="description" placeholder="Digite a Descrição do Livro" required>
+            <span class="button-text">Descrição:</span>
+            <input type="text" class="form-control" style="height: 130px;" v-model="description" placeholder="Digite a Descrição do Livro" required>
             <p v-if="errors.description" class="text-danger">{{ errors.description }}</p>
   
             <div class="button-perfil-user mt-5">

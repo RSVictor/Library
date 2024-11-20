@@ -4,17 +4,38 @@
       <p>Bem-vindo, Usuário!</p>
     </div>
 
-    <div class="titulo-adm-button mt-2" style="display: flex; justify-content: center;">     
+    <div class="titulo-adm-button mt-2" style="display: flex; justify-content: center;">
       <div class="button-adm">
-        <RouterLink to="/listalivro">Livros</RouterLink>
+        <router-link to="/listalivro">Livros</router-link>
       </div>
       <div class="button-adm">
-        <RouterLink to="/listaUser">Usuários</RouterLink>
+        <router-link to="/listaUser">Usuários</router-link>
       </div>
       <div class="button-adm">
-        <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
+        <router-link to="/adicionarLivro">Adicionar Livros</router-link>
       </div>
-     
+
+      <!-- Botão de adicionar notificação -->
+      <div>
+        <button class="button-adm" style="color: white; border: none;  margin-left: auto; display: block;" @click="showNotificationInput = !showNotificationInput">
+          Enviar Notificação
+        </button>
+      </div>
+    </div>
+
+    <!-- Exibir o input de notificação se showNotificationInput for verdadeiro -->
+    <div v-if="showNotificationInput" class="row">
+      <span>Enviar Notificação</span>
+      <div class="col-12">
+        <input 
+          type="text" 
+          v-model="newNotification" 
+          placeholder="Digite a mensagem da notificação..." 
+          class="form-control"
+        />
+        <button @click="sendNotification" class="btn btn-custom-green mt-2">Enviar</button>
+
+      </div>
     </div>
 
     <div class="painel mt-3 mb-5">
@@ -46,15 +67,18 @@
         <span  class="titulo-card">Gráfico de atividades</span>
         <canvas id="activityChart"></canvas>
       </div>
-      -->
-    </div>
+       -->
   </div>
+  </div>
+ 
 </template>
 
 
+
 <script>
-import axios from 'axios'; // Importa o axios
-import { onMounted, ref } from 'vue'; // Importa ref para reatividade
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useNotificationStore } from '../stores/notificationStore';
 
 export default {
   setup() {
@@ -62,20 +86,35 @@ export default {
     const totalLivros = ref(0);
     const totalUsuarios = ref(0);
     const totalLivrosEmprestados = ref(0);
-    
+    const newNotification = ref(''); // Notificação para enviar
+    const showNotificationInput = ref(false);
+    const notificationStore = useNotificationStore(); // Store de notificações
+
     // Função para fazer a requisição à API
     const getData = async () => {
       try {
-        const responseLivros = await axios.get('http://localhost:3000/api/books'); 
-        totalLivros.value = responseLivros.data.length; 
-        
-        const responseUsuarios = await axios.get('http://localhost:3000/admin/api/users'); 
-        totalUsuarios.value = responseUsuarios.data.length; 
-        
-        const responseLivrosEmprestados = await axios.get('https://suaapi.com/api/livros/emprestados'); // URL para livros emprestados
-        totalLivrosEmprestados.value = responseLivrosEmprestados.data.length; // Quantidade de livros emprestados
+        const responseLivros = await axios.get('http://localhost:3000/api/books');
+        totalLivros.value = responseLivros.data.length;
+
+        const responseUsuarios = await axios.get('http://localhost:3000/admin/api/users');
+        totalUsuarios.value = responseUsuarios.data.length;
+
+        const responseLivrosEmprestados = await axios.get('https://suaapi.com/api/livros/emprestados');
+        totalLivrosEmprestados.value = responseLivrosEmprestados.data.length;
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
+      }
+    };
+
+    // Método para enviar notificações
+    const sendNotification = () => {
+      if (newNotification.value.trim()) {
+        notificationStore.addNotification(newNotification.value);
+        alert('Notificação enviada com sucesso!');
+        newNotification.value = ''; // Limpa o campo
+        showNotificationInput.value = false; // Esconde o input após o envio
+      } else {
+        alert('A mensagem não pode estar vazia.');
       }
     };
 
@@ -87,11 +126,15 @@ export default {
     return {
       totalLivros,
       totalUsuarios,
-      totalLivrosEmprestados
+      totalLivrosEmprestados,
+      newNotification,
+      sendNotification,
+      showNotificationInput
     };
-  }
+  },
 };
 </script>
+
 
 <style scoped>
 
@@ -178,7 +221,18 @@ export default {
     color: white;
 }
 
+.btn-custom-green {
+  background-color: #335844; /* Cor de fundo verde */
+  color: white; /* Cor do texto branca */
+  border: none; /* Remove borda */
+}
 
+.btn-custom-green:hover {
+  background-color: #335844; /* Mantém a cor de fundo original */
+  border: none; /* Remove qualquer borda adicional no hover */
+  box-shadow: none; /* Remove a sombra do hover */
+  color: white;
+}
 
 </style>
 

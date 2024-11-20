@@ -42,7 +42,7 @@ export default {
         // Chama o método de login da loja
         authStore.login(response.data.token, response.data.permissions);
 
-        this.message = 'Login bem-sucedido!';
+       
 
         // Redirecionar com base na permissão
         if (response.data.permissions === 'Usuario') {

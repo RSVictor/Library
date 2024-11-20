@@ -891,17 +891,16 @@ font-size: 14px;
     background-color: #f9f9f9;
     font-size: 25px;
     flex-grow: 1;
-   padding: 20px;
-   
-    
+   padding: 20px;       
 }
 
 .form{
     display: flex;
     flex-direction: column;
+    align-items: flex-start; /* Garante que os itens começam no topo */
 }
-.dados-adicionar{   
-     
+
+.dados-adicionar{     
     display: flex;
     flex-direction: row;  
     background-color: #AFC1B1;

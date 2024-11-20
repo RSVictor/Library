@@ -33,10 +33,11 @@
 </svg>
           </a>
           <ul class="dropdown-menu text-small">
-            <li><RouterLink to="/homeADM" class="dropdown-item">Home</RouterLink></li> 
-            <li><RouterLink to="/listalivro" class="dropdown-item">Lista livros</RouterLink></li>
-            <li><RouterLink to="/adicionarLivro" class="dropdown-item">Adicionar livro</RouterLink></li>
-            <li><RouterLink to="/listaUser" class="dropdown-item">Lista usuários</RouterLink></li>           
+            <li><router-link to="/dashboard" class="dropdown-item">Dashboard</router-link></li>     
+            <li><router-link to="/homeADM" class="dropdown-item">Acervo</router-link></li>
+            <li><router-link to="/listalivro" class="dropdown-item">Lista livros</router-link></li>
+            <li><router-link to="/adicionarLivro" class="dropdown-item">Adicionar livro</router-link></li>
+            <li><router-link to="/listaUser" class="dropdown-item">Lista usuários</router-link></li>                
             <li><hr class="dropdown-divider"></li>
             <li><button class="dropdown-item" @click="logout">Logout</button></li>
           </ul>
