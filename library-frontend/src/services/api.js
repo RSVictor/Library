@@ -18,15 +18,16 @@ const apiClient = axios.create({
 
 // Adiciona interceptores a ambas as instâncias para enviar token JWT
 const attachInterceptor = (client) => {
-    client.interceptors.request.use((config) => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
+    client.interceptors.request.use(
+        (config) => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        },
+        (error) => Promise.reject(error)
+    );
 };
 
 attachInterceptor(booksApiClient);
@@ -42,13 +43,22 @@ export const booksService = {
     },
     fetchBookById(id) {
         console.log(`Buscando livro com ID: ${id}`);
-        return booksApiClient.get(`/${id}`).then(response => response.data);
+        return booksApiClient.get(`/${id}`).then((response) => response.data);
     },
     updateBook(id, book) {
         return booksApiClient.put(`/${id}`, book); // Atualiza um livro existente
     },
     deleteBook(id) {
         return booksApiClient.delete(`/${id}`); // Deleta um livro pelo ID
+    },
+    addReview(bookId, review) {
+        return booksApiClient.post(`/${bookId}/reviews`, review); // Adiciona uma avaliação a um livro
+    },
+    fetchMostSearchedBooks() {
+        return booksApiClient.get('/most-searched'); // Obtém os livros mais buscados
+    },
+    incrementSearchCount(bookId) {
+        return booksApiClient.post(`/viewed/${bookId}`); // Incrementa a contagem de visualizações de um livro
     },
 };
 
@@ -60,36 +70,11 @@ export const userService = {
     async getProfile() {
         const response = await apiClient.get('/profile');
         return response.data;
-      },
+    },
     register(userData) {
         return apiClient.post('/auth/register', userData); // Registra um novo usuário
     },
-    getProfile() {
-        return apiClient.get('/profile'); // Obtém perfil do usuário
-    },
 };
-
-
-// Função para buscar os livros mais buscados da API
-const fetchMostSearchedBooks = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/api/books/most-searched');
-    mostSearchedBooks.value = response.data; // Atualiza o estado com os livros mais buscados
-  } catch (error) {
-    console.error('Erro ao buscar livros mais buscados', error);
-  }
-};
-
-// Função para registrar a visualização de um livro
-const incrementSearchCount = async (bookId) => {
-  try {
-    await axios.post(`http://localhost:3000/api/books/viewed/${bookId}`);
-  } catch (error) {
-    console.error('Erro ao registrar busca', error);
-  }
-};
-
-  
 
 // Exporta os clientes de API para uso em outros módulos
 export { booksApiClient, apiClient };

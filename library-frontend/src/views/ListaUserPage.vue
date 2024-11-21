@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Seção do usuário -->
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}! </p>
     </div>
 
     <!-- Menu de navegação -->
@@ -75,10 +75,12 @@
 
 <script>
 import axios from 'axios';
+import { useAuthStore } from '../stores/authStore';
 
 export default {
   data() {
     return {
+      username: '',        // Armazena o nome do usuário
       users: [],           // Lista de usuários
       searchQuery: '',     // Para pesquisa de usuários
       filteredUsers: [],   // Lista filtrada de usuários conforme a pesquisa
@@ -87,6 +89,9 @@ export default {
     };
   },
   mounted() {
+    // Obtém o nome do usuário da store
+    const authStore = useAuthStore();
+    this.username = authStore.username; // Armazena o nome do usuário
     this.fetchUsers();   // Carregar usuários ao montar o componente
   },
 

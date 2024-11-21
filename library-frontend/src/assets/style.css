@@ -197,29 +197,30 @@ i {
 
 
 
-.avaliacoes {
-    align-items: center;
+.avaliacoes {    
     width: 933px;
-    height: 100px;
+    height: 90px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
+    display: flex;    
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 15px;  
     background-color: #f9f9f9;
+    
 }
 
 
-.pessoa {
+.pessoa {     
     font-weight: bold;
-    margin-bottom: 5px;
+  
 }
 
 .comentario {
-    margin-bottom: 10px;
+   font-size: 18px;
+   
 }
 
 .bi-star {
@@ -233,6 +234,7 @@ i {
 
 .titulo {
     display: flex;
+    align-items: center;
     text-align: center;
     font-size: 28px;
     justify-content: center;

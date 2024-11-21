@@ -40,7 +40,7 @@ export default {
 
         const authStore = useAuthStore();
         // Chama o método de login da loja
-        authStore.login(response.data.token, response.data.permissions);
+        authStore.login(response.data.token, response.data.permissions, response.data.username);
 
        
 

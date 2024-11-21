@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="user">
+      <p>Bem-vindo, {{ username }}! </p>
+    </div>
     <div class="row mt-3">
       <span>Editoras</span>
       <div class="mt-3 mb-5 row circulos">
@@ -139,6 +142,9 @@ goToPreviousPage() {
 }
   },
   mounted() {
+    // Obtém o nome do usuário da store
+    const authStore = useAuthStore();
+    this.username = authStore.username; // Armazena o nome do usuário
     this.fetchBooks();
     if (this.searchQuery) {
       this.applyFilter();

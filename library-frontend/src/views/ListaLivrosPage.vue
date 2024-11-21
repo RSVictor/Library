@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}! </p>
     </div>
 
     <div class="titulo-adm-button ">
@@ -69,10 +69,12 @@
 
 <script>
 import axios from 'axios';
+import { useAuthStore } from '../stores/authStore';
 
-export default {
+export default { 
   data() {
-    return {
+       return {
+      username: '',        // Armazena o nome do usuário
       books: [],             // Armazena todos os livros
       searchQuery: '',       // Termo de pesquisa
       currentPage: 1,        // Página atual
@@ -80,6 +82,10 @@ export default {
     };
   },
   mounted() {
+    // Obtém o nome do usuário da store
+    const authStore = useAuthStore();
+    this.username = authStore.username; // Armazena o nome do usuário
+
     this.fetchBooks();  // Chama a função para buscar livros quando o componente for montado
   },
 

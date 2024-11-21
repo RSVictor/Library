@@ -46,6 +46,21 @@
   
           </ul>
         </div>
+
+        <div v-if="isAdmin" class="titulo">Avaliações</div>
+      <div v-if="isAdmin" v-for="(review, index) in reviews" :key="index" class="avaliacoes mt-3">
+        <div class="pessoa">
+          <p>{{ review.user }}</p>
+        </div>
+        <div class="comentario">
+          <p>{{ review.text }}</p>
+        </div>
+        <div>
+          <p>
+            <i v-for="n in 5" :key="n" :class="n <= parseInt(review.rating) ? 'bi bi-star like' : 'bi bi-star'"></i>
+          </p>
+        </div>
+      </div>
        </div>
     </div>
   
@@ -54,57 +69,62 @@
   </template>
   
   <script>
-  import { booksService } from '@/services/api'; // Importa o serviço de livros
-  import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
-  import { useRouter } from 'vue-router';
+import { booksService } from '@/services/api'; // Importa o serviço de livros
+import { useAuthStore } from '../stores/authStore'; // Importa a store de autenticação
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+    
+    // Verifique se o usuário é administrador
+    const isAdmin = authStore.isLoggedIn && authStore.username === 'ADM'; // Ou qualquer outra lógica para identificar o admin
+    
+    
+    return {isAdmin };
+  },
   
-  export default {
-    setup() {
-      const authStore = useAuthStore();
-      const router = useRouter();
-  
-      const handleEmprestar = () => {
-        if (!authStore.isLoggedIn) {
-          alert('Você precisa fazer login para emprestar um livro.');
-          router.push('/login');
-        } else {
-          // Redireciona para a página de empréstimo
-          router.push('/emprestimo');
-        }
-      };
-  
-      return { handleEmprestar };
-    },
-      props: {
-      id: {
-        type: String,
-        required: true
-      }
-    },
-    data() {
-      return {
-        book: null,
-      };
-    },
-    watch: {
-      // Quando a prop 'id' mudar, a função fetchBook será chamada para atualizar os dados
-      id: 'fetchBook'
-    },
-    mounted() {
-      this.fetchBook();  // Chama a função fetchBook ao montar
-    },
-    methods: {
-      fetchBook() {
-        booksService.fetchBookById(this.id)
-          .then(data => {
-            this.book = data;
-          })
-          .catch(error => console.error("Erro ao buscar dados do livro:", error));
-      },
-      formatImagePath(path) {
-        // Corrige as barras e adiciona o caminho completo da URL
-        return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
-      }
+  props: {
+    id: {
+      type: String,
+      required: true
     }
-  };
-  </script>
+  },
+  
+  data() {
+    return {
+      book: null,
+      reviews: [], // Lista de avaliações
+    };
+  },
+  
+  watch: {
+    // Quando a prop 'id' mudar, a função fetchBook será chamada para atualizar os dados
+    id: 'fetchBook'
+  },
+  
+  mounted() {
+    this.fetchBook();  // Chama a função fetchBook ao montar
+  },
+  
+  methods: {
+    fetchBook() {
+      booksService.fetchBookById(this.id)
+        .then(data => {
+          this.book = data;
+          // Carrega as avaliações para o administrador
+          if (this.$props.isAdmin) {
+            this.reviews = data.reviews || []; // Atribui as avaliações
+          }
+        })
+        .catch(error => console.error("Erro ao buscar dados do livro:", error));
+    },
+    
+    formatImagePath(path) {
+      // Corrige as barras e adiciona o caminho completo da URL
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+    }
+  }
+};
+</script>

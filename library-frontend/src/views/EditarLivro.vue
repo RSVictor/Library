@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}! </p>
     </div>
 
     <div class="titulo-emp">
@@ -90,6 +90,7 @@
 
 <script>
 import axios from 'axios';
+import { useAuthStore } from '../stores/authStore'; // Certifique-se de que o caminho da store está correto
 
 export default {
   data() {
@@ -103,12 +104,15 @@ export default {
         amount: '',
         description: '',
         image: null,
+        username: '', // Defina a variável username para armazenar o nome de usuário
       },
       imagePreview: null, // Nova variável para armazenar a URL temporária da imagem
       errors: {}, // Objeto para armazenar as mensagens de erro
     };
   },
   mounted() {
+    const authStore = useAuthStore(); // Acessa a store de autenticação
+    this.username = authStore.username; // Armazena o nome do usuário na variável 'username'
     this.fetchBookData();
   },
   methods: {

@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
             message: 'Login realizado',
             token,
             permissions: user.permissions,
+            username: user.username,  
         });
     } catch (error) {
         console.error(error); // Loga o erro

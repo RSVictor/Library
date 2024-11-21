@@ -25,9 +25,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Função de login
   const login = (token, permissions, name) => {
+    
     localStorage.setItem('token', token);
     localStorage.setItem('permissions', permissions);
     localStorage.setItem('username', name); // Armazena o nome do usuário
+    console.log("Username no localStorage:", name); 
     isLoggedIn.value = true;
     userPermission.value = permissions;
     username.value = name;

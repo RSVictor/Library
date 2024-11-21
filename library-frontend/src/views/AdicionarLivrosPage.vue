@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="user">
-        <p>Bem-vindo, Usuário!</p>
+        <p>Bem-vindo, {{ username }}! </p>
       </div>
   
       <div class="titulo-emp">
@@ -92,106 +92,119 @@
   </template>
   
   <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        code: '',
-        title: '',
-        author: '',
-        year: '',
-        gender: '',
-        amount: '',
-        description: '',
-        image: null,
-        imagePreview: null,  // URL temporária da imagem
-        errors: {},  // Objeto para armazenar as mensagens de erro
-      };
+import axios from 'axios';
+import { useAuthStore } from '../stores/authStore'; // Certifique-se de que o caminho da store está correto
+
+export default {
+  data() {
+    return {
+      code: '',
+      title: '',
+      author: '',
+      year: '',
+      gender: '',
+      amount: '',
+      description: '',
+      image: null,
+      imagePreview: null,  // URL temporária da imagem
+      errors: {},  // Objeto para armazenar as mensagens de erro
+      username: '', // Defina a variável username para armazenar o nome de usuário
+    };
+  },
+
+  // Movi o mounted para o local correto
+  mounted() {
+    const authStore = useAuthStore(); // Acessa a store de autenticação
+    this.username = authStore.username; // Armazena o nome do usuário na variável 'username'
+
+    // Se você tiver uma função para buscar livros, como `fetchBooks`, chame aqui
+    // this.fetchBooks();  
+  },
+
+  methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.image = file;
+        this.imagePreview = URL.createObjectURL(file);  // Cria a URL da imagem para exibição
+      }
     },
-    methods: {
-      handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-          this.image = file;
-          this.imagePreview = URL.createObjectURL(file);  // Cria a URL da imagem para exibição
-        }
-      },
-  
-      // Função para validar os campos
-      validateForm() {
-        this.errors = {};  // Limpar erros anteriores
-        let valid = true;
-  
-        // Verificar se cada campo está vazio e adicionar erro se necessário
-        if (!this.code) {
-          this.errors.code = 'Código ISBN é obrigatório.';
-          valid = false;
-        }
-        if (!this.title) {
-          this.errors.title = 'Título é obrigatório.';
-          valid = false;
-        }
-        if (!this.author) {
-          this.errors.author = 'Autor é obrigatório.';
-          valid = false;
-        }
-        if (!this.year) {
-          this.errors.year = 'Ano de publicação é obrigatório.';
-          valid = false;
-        }
-        if (!this.gender) {
-          this.errors.gender = 'Gênero é obrigatório.';
-          valid = false;
-        }
-        if (!this.amount) {
-          this.errors.amount = 'Quantidade é obrigatória.';
-          valid = false;
-        }
-        if (!this.description) {
-          this.errors.description = 'Descrição é obrigatória.';
-          valid = false;
-        }
-  
-        return valid;
-      },
-  
-      async enviarFormulario() {
-        // Validar os campos antes de enviar o formulário
-        if (!this.validateForm()) {
-          return;  // Se o formulário não for válido, não envia
-        }
-  
-        const formData = new FormData();
-        formData.append('code', this.code);
-        formData.append('title', this.title);
-        formData.append('author', this.author);
-        formData.append('year', this.year);
-        formData.append('gender', this.gender);
-        formData.append('amount', this.amount);
-        formData.append('description', this.description);
-        
-        if (this.image) {
-          formData.append('image', this.image);
-        }
-  
-        try {
-  const response = await axios.post('http://localhost:3000/api/books', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+
+    // Função para validar os campos
+    validateForm() {
+      this.errors = {};  // Limpar erros anteriores
+      let valid = true;
+
+      // Verificar se cada campo está vazio e adicionar erro se necessário
+      if (!this.code) {
+        this.errors.code = 'Código ISBN é obrigatório.';
+        valid = false;
+      }
+      if (!this.title) {
+        this.errors.title = 'Título é obrigatório.';
+        valid = false;
+      }
+      if (!this.author) {
+        this.errors.author = 'Autor é obrigatório.';
+        valid = false;
+      }
+      if (!this.year) {
+        this.errors.year = 'Ano de publicação é obrigatório.';
+        valid = false;
+      }
+      if (!this.gender) {
+        this.errors.gender = 'Gênero é obrigatório.';
+        valid = false;
+      }
+      if (!this.amount) {
+        this.errors.amount = 'Quantidade é obrigatória.';
+        valid = false;
+      }
+      if (!this.description) {
+        this.errors.description = 'Descrição é obrigatória.';
+        valid = false;
+      }
+
+      return valid;
     },
-  });
-  console.log('Livro adicionado:', response.data);
-  alert('Livro cadastrado com sucesso!');
-  this.$router.push('/dashboard');
-} catch (error) {
-  console.error('Erro ao adicionar livro:', error.response ? error.response.data : error);
-  alert('Erro ao cadastrar o livro: ' + (error.response ? error.response.data.message : 'Erro desconhecido.'));
-}
-}
+
+    async enviarFormulario() {
+      // Validar os campos antes de enviar o formulário
+      if (!this.validateForm()) {
+        return;  // Se o formulário não for válido, não envia
+      }
+
+      const formData = new FormData();
+      formData.append('code', this.code);
+      formData.append('title', this.title);
+      formData.append('author', this.author);
+      formData.append('year', this.year);
+      formData.append('gender', this.gender);
+      formData.append('amount', this.amount);
+      formData.append('description', this.description);
+      
+      if (this.image) {
+        formData.append('image', this.image);
+      }
+
+      try {
+        const response = await axios.post('http://localhost:3000/api/books', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log('Livro adicionado:', response.data);
+        alert('Livro cadastrado com sucesso!');
+        this.$router.push('/dashboard');
+      } catch (error) {
+        console.error('Erro ao adicionar livro:', error.response ? error.response.data : error);
+        alert('Erro ao cadastrar o livro: ' + (error.response ? error.response.data.message : 'Erro desconhecido.'));
+      }
     }
-  };
-  </script>
+  }
+};
+</script>
+
   
   <style scoped>
   .text-danger {

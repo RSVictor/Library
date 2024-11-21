@@ -4,6 +4,7 @@ const fs = require('fs');
 const Book = require('../models/Book');
 const express = require('express');
 const router = express.Router();
+const Review = require('../models/Review'); // Importa o modelo de Avaliações
 
 // Configuração do multer para upload de imagens
 const storage = multer.diskStorage({
@@ -53,18 +54,22 @@ module.exports = (upload) => {
         }
     });
 
-    router.get('/:id', async (req, res) => {
-        try {
-            const book = await Book.findById(req.params.id);
-            if (!book) {
-                return res.status(404).json({ message: 'Livro não encontrado' });
-            }
-            res.status(200).json(book);  // Retorna o livro encontrado
-        } catch (error) {
-            res.status(500).json({ message: 'Erro ao buscar o livro', error });
-        }
-    });
+    // Rota para buscar livro com avaliações
+router.get('/:id', async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id); // Buscar o livro
+        const reviews = await Review.find({ bookId: req.params.id }); // Buscar as avaliações do livro
 
+        if (!book) {
+            return res.status(404).send('Livro não encontrado');
+        }
+
+        // Retornar o livro com as avaliações
+        res.json({ ...book.toObject(), reviews });
+    } catch (err) {
+        res.status(500).send('Erro ao buscar o livro');
+    }
+});
     router.put('/:id', upload.single('image'), async (req, res) => {
         try {
             const { code, title, author, year, gender, amount, description } = req.body;
@@ -157,6 +162,31 @@ module.exports = (upload) => {
         }
     });
     
+  
+
+
+// Rota para adicionar avaliações
+router.post('/:id/reviews', async (req, res) => {
+    try {
+        const review = new Review({
+            bookId: req.params.id,
+            user: req.body.user,
+            text: req.body.text,
+            rating: req.body.rating
+        });
+
+        // Salvar a avaliação no banco
+        await review.save();
+
+        // Buscar as avaliações mais recentes
+        const reviews = await Review.find({ bookId: req.params.id });
+
+        // Retornar as avaliações mais recentes
+        res.status(201).json(reviews);  // Retorne todas as avaliações, incluindo a recém-adicionada
+    } catch (err) {
+        res.status(500).send('Erro ao salvar avaliação.');
+    }
+});
 
     // Retorne o router configurado
     return router;

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}! </p>
     </div>
 
     <div class="titulo-adm-button mt-2" style="display: flex; justify-content: center;">
@@ -76,12 +76,17 @@
 
 
 <script>
+import { ref, onMounted } from 'vue';
+import { useAuthStore } from '../stores/authStore'; // Importa a store de autenticação
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
 import { useNotificationStore } from '../stores/notificationStore';
 
 export default {
   setup() {
+    // Acessa a store de autenticação
+    const authStore = useAuthStore();
+    const username = ref(authStore.username); // Obtém o nome do usuário da store
+
     // Variáveis reativas para armazenar os dados
     const totalLivros = ref(0);
     const totalUsuarios = ref(0);
@@ -124,6 +129,7 @@ export default {
     });
 
     return {
+      username,  // Exporte o username para o template
       totalLivros,
       totalUsuarios,
       totalLivrosEmprestados,
@@ -134,6 +140,7 @@ export default {
   },
 };
 </script>
+
 
 
 <style scoped>
