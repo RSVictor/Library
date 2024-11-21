@@ -144,6 +144,8 @@ export default {
   },
 
   mounted() {
+    const authStore = useAuthStore(); // Acessa a store de autenticação
+    this.username = authStore.username; // Armazena o nome do usuário na variável 'username'
     this.fetchUserData(); // Chama a função ao montar o componente
   },
 };

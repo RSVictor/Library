@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}</p>
     </div>
 
     <div class="titulo-fav">
@@ -52,11 +52,17 @@
 </template>
 
 <script>
+import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
 import { useFavoriteStore } from '../stores/favoriteStore'; // Importe a store de favoritos
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';  // Importe ref de 'vue'
 
 export default {
   setup() {
+    // Acessa a store de autenticação
+    const authStore = useAuthStore();
+    const username = ref(authStore.username); // Obtém o nome do usuário da store
+    
     const favoriteStore = useFavoriteStore();  // Usando a store de favoritos
     const router = useRouter();
 
@@ -68,9 +74,7 @@ export default {
       favoriteStore.removeFromFavorites(book);  // Chama o método da store para remover
     };
 
-
-
-    return { favorites, removeFromFavorites };
+    return { username, favorites, removeFromFavorites };
   },
 
   methods: {
@@ -81,3 +85,4 @@ export default {
   }
 };
 </script>
+

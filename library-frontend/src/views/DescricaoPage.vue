@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="user" v-if="isLoggedIn">
+      <p>Bem-vindo, {{ username }}</p>
+    </div>
     <div class="row mt-3">
       <span>Editoras</span>
       <div class="mt-3 mb-5 row circulos">
@@ -106,68 +109,54 @@
 import { booksService } from '@/services/api';
 import { useAuthStore } from '../stores/authStore';
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'; // Importando ref e onMounted
 
 export default {
-  setup() {
-  const authStore = useAuthStore();
-  const router = useRouter();
+  setup(props) {
+    const authStore = useAuthStore();
+    const router = useRouter();
 
-  const handleEmprestar = () => {
-    if (!authStore.isLoggedIn) {
-      alert('Você precisa fazer login para emprestar um livro.');
-      router.push('/login');
-    } else {
-      router.push('/emprestimo');
-    }
-  };
+    // Definindo as variáveis reativas dentro do setup
+    const username = ref(authStore.username); // Obtém o nome do usuário da store
+    const isLoggedIn = ref(authStore.isLoggedIn); // Checa se o usuário está logado
+    const book = ref(null); // Dados do livro
+    const reviews = ref([]); // Lista de avaliações
+    const newReview = ref({ text: '', rating: '' }); // Avaliação atual
 
-  // Retorne o username, isLoggedIn e os outros dados necessários
-  return { 
-    handleEmprestar, 
-    isLoggedIn: authStore.isLoggedIn, 
-    username: authStore.username // Adicione o username aqui
-  };
-},
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      book: null,
-      reviews: [], // Lista de avaliações
-      newReview: { text: '', rating: '' }, // Avaliação atual
-      rating: '',
+    // Função para "emprestar" o livro
+    const handleEmprestar = () => {
+      if (!authStore.isLoggedIn) {
+        alert('Você precisa fazer login para emprestar um livro.');
+        router.push('/login');
+      } else {
+        router.push('/emprestimo');
+      }
     };
-  },
-  mounted() {
-    this.fetchBook();
-  },
-  methods: {
-    fetchBook() {
-      booksService.fetchBookById(this.id)
-        .then((data) => {
-          this.book = data;
-          this.reviews = data.reviews || []; // Atribuindo as avaliações do livro
-        })
-        .catch((error) => console.error('Erro ao buscar dados do livro:', error));
-    },
-    formatImagePath(path) {
+
+    // Função para buscar o livro por ID
+    const fetchBook = async () => {
+      try {
+        const data = await booksService.fetchBookById(props.id);
+        book.value = data;
+        reviews.value = data.reviews || []; // Atribuindo as avaliações do livro
+      } catch (error) {
+        console.error('Erro ao buscar dados do livro:', error);
+      }
+    };
+
+    // Função para formatar o caminho da imagem
+    const formatImagePath = (path) => {
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
-    },
+    };
 
-    submitReview() {
-      const authStore = useAuthStore();
-      const username = authStore.username;
-
-      if (!this.newReview.text || !this.newReview.rating) {
+    // Função para enviar avaliação
+    const submitReview = () => {
+      if (!newReview.value.text || !newReview.value.rating) {
         alert('Por favor, preencha o comentário e a nota.');
         return;
       }
 
-      const ratingValue = parseInt(this.newReview.rating);
+      const ratingValue = parseInt(newReview.value.rating);
 
       if (isNaN(ratingValue) || ratingValue < 1 || ratingValue > 5) {
         alert('Por favor, escolha uma nota válida (de 1 a 5 estrelas).');
@@ -175,21 +164,44 @@ export default {
       }
 
       const review = {
-        user: username || 'Usuário Logado',
-        text: this.newReview.text,
-        rating: ratingValue,  
+        user: username.value || 'Usuário Logado',
+        text: newReview.value.text,
+        rating: ratingValue,
       };
 
-      booksService.addReview(this.id, review)
+      booksService.addReview(props.id, review)
         .then(() => {
-          this.fetchBook();
-          this.newReview = { text: '', rating: '' };
+          fetchBook(); // Recarregar as avaliações
+          newReview.value = { text: '', rating: '' }; // Limpar o formulário de avaliação
           alert('Avaliação enviada com sucesso!');
         })
         .catch((error) => {
           console.error('Erro ao enviar avaliação:', error);
           alert('Erro ao enviar avaliação. Tente novamente.');
         });
+    };
+
+    // Buscar o livro assim que o componente for montado
+    onMounted(() => {
+      fetchBook();
+    });
+
+    return {
+      handleEmprestar,
+      isLoggedIn,
+      username,
+      book,
+      reviews,
+      newReview,
+      formatImagePath,
+      submitReview,
+    };
+  },
+
+  props: {
+    id: {
+      type: String,
+      required: true,
     },
   },
 };

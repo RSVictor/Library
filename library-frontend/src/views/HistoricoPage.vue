@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="user">
+      <p>Bem-vindo, {{ username }}</p>
+    </div>
     <div class="row mt-3">
       <span>Editoras</span>
       <div class="mt-3 mb-5 row circulos">

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <p>Bem-vindo, Usuário!</p>
+      <p>Bem-vindo, {{ username }}</p>
     </div>
 
     <div class="titulo-fav">
@@ -35,7 +35,12 @@ import axios from 'axios'; // Certifique-se de que o axios está importado
 
 export default {
   setup() {
+    // Primeiro inicializa authStore
     const authStore = useAuthStore();
+
+    // Agora, cria a referência para o nome do usuário
+    const username = ref(authStore.username); // Obtém o nome do usuário da store
+
     const router = useRouter();
     const mostSearchedBooks = ref([]); // Lista reativa de livros mais buscados
 
@@ -84,10 +89,11 @@ export default {
       return `http://localhost:3000/${path}`; // Ajuste o caminho conforme sua estrutura
     };
 
-    return { mostSearchedBooks, handleEmprestar, formatImagePath };
+    return { mostSearchedBooks, handleEmprestar, formatImagePath, username };
   },
 };
 </script>
+
 
 <style scoped>
 /* Adicione os estilos conforme necessário */
