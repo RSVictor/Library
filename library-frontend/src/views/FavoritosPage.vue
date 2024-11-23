@@ -16,11 +16,8 @@
       <span>Você não tem favoritos ainda.</span>
     </div>
 
-    <div class="row flex-wrap" style="gap: 20px;">
-      <div 
-        class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 mb-3 card-fav mt-5" 
-        v-for="book in favorites" 
-        :key="book._id">
+    <div class="row flex-wrap" style="gap: 10px;">
+      <div class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 card-fav mt-3"  v-for="book in favorites" :key="book._id">
         
         <router-link :to="{ name: 'descricao', params: { id: book._id } }">
           <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
@@ -52,37 +49,42 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
+import { useAuthStore } from '../stores/authStore'; // Ajuste o caminho se necessário
 import { useFavoriteStore } from '../stores/favoriteStore'; // Importe a store de favoritos
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';  // Importe ref de 'vue'
+import { ref, computed, onMounted } from 'vue';  // Importe ref, computed e onMounted
 
 export default {
   setup() {
-    // Acessa a store de autenticação
-    const authStore = useAuthStore();
-    const username = ref(authStore.username); // Obtém o nome do usuário da store
+    const authStore = useAuthStore();  // Store de autenticação
+    const favoriteStore = useFavoriteStore();  // Store de favoritos
     
-    const favoriteStore = useFavoriteStore();  // Usando a store de favoritos
-    const router = useRouter();
 
-    // Lista reativa de favoritos
-    const favorites = favoriteStore.favorites;
+    // Recupera os favoritos da store
+    const favorites = computed(() => favoriteStore.favorites);  // A store de favoritos deve ter essa propriedade
 
-    // Função para remover o livro da lista de favoritos
+    // Recupera o nome do usuário logado
+    const username = computed(() => authStore.user?.username || 'Visitante');
+
+    // Função para remover o livro dos favoritos
     const removeFromFavorites = (book) => {
-      favoriteStore.removeFromFavorites(book);  // Chama o método da store para remover
-    };
+      favoriteStore.removeFromFavorites(book);
+    }
 
-    return { username, favorites, removeFromFavorites };
-  },
-
-  methods: {
-    // Método para formatar o caminho da imagem
-    formatImagePath(path) {
+    // Função para formatar o caminho da imagem
+    const formatImagePath = (path) => {
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
     }
+
+    return {
+      favorites,  // Lista de favoritos reativa
+      username,   // Nome do usuário logado
+      removeFromFavorites,  // Função para remover do favoritos
+      formatImagePath  // Função para formatar o caminho da imagem
+    };
   }
 };
 </script>
 
+<style scoped>
+/* Adicione estilos adicionais conforme necessário */
+</style>

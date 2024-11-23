@@ -37,13 +37,18 @@
               <h5 class="card-title">{{ book.title }}</h5>
               <div class="button">
                 <button class="btn btn-primary" style="background-color: #335844; border: none; height: 40px"
-                  @click="handleEmprestar">Emprestar</button>
-                  <button 
-                  class="btn btn-primary" 
-                  style="background-color: #F4D94C; height: 40px; border: none;" 
-                  @click="toggleFavorite(book)">
-                  <i :class="isFavorite(book) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+                  @click="handleEmprestar">Emprestar
                 </button>
+
+                  <!-- Botão Favorito visível para todos, mas com comportamento diferente -->
+            <button class="btn btn-primary" 
+                    style="background-color: #F4D94C; height: 40px; border: none;" 
+                    @click="toggleFavorite(book)">
+              <!-- Ícone de coração, alterado conforme favorito ou não -->
+              <i :class="isFavorite(book) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+            </button>
+
+            
               </div>
             </div>
           </div>
@@ -78,6 +83,12 @@ export default {
     const currentPage = ref(1);
     const booksPerPage = 12;
 
+    // Ao logar, carregar favoritos do usuário
+    if (authStore.isLoggedIn && authStore.user) {
+      favoriteStore.loadFavorites(authStore.user.id);
+    }
+
+
     const handleEmprestar = () => {
       if (!authStore.isLoggedIn) {
         alert('Você precisa fazer login para emprestar um livro.');
@@ -86,8 +97,14 @@ export default {
         router.push('/emprestimo');
       }
     };
-
-    const toggleFavorite = (book) => {
+    
+ // Função para alternar o favorito (adicionar ou remover)
+ const toggleFavorite = (book) => {
+      if (!authStore.isLoggedIn) {
+        alert("Você precisa estar logado para favoritar.");
+        router.push('/login');
+        return;  // Impede qualquer outra ação se não estiver logado
+      }
       if (favoriteStore.isFavorite(book)) {
         favoriteStore.removeFromFavorites(book);
       } else {
@@ -95,9 +112,11 @@ export default {
       }
     };
 
+    // Verifica se o livro está nos favoritos
     const isFavorite = (book) => {
       return favoriteStore.isFavorite(book);
     };
+
 
     const formatImagePath = (path) => {
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
