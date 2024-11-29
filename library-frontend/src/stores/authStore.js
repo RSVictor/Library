@@ -1,49 +1,59 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useFavoriteStore } from './favoriteStore'; // Importe a store de favoritos
 
 export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = ref(false);
   const userPermission = ref(null);
-  const username = ref(''); // Armazena o nome do usuário
+  const username = ref('');
+  const userId = ref(null); // Armazenar o ID do usuário
+
+  const favoriteStore = useFavoriteStore(); // Referência à store de favoritos
 
   // Função para verificar o status de autenticação
   const checkAuthStatus = () => {
     const token = localStorage.getItem('token');
     const permissions = localStorage.getItem('permissions');
+    const id = localStorage.getItem('userId');  // Recupere o userId do localStorage
     
-    // Se o token e as permissões existirem no localStorage, o usuário está autenticado
-    if (token && permissions) {
+    if (token && permissions && id) {
       isLoggedIn.value = true;
       userPermission.value = permissions;
-      username.value = localStorage.getItem('username') || ''; // Se necessário, também pode guardar o username
+      username.value = localStorage.getItem('username') || '';
+      userId.value = id;  // Define o userId
     } else {
       isLoggedIn.value = false;
       userPermission.value = null;
-      username.value = ''; // Limpa o nome de usuário caso não esteja autenticado
+      username.value = '';
+      userId.value = null;  // Limpa o userId
     }
   };
 
   // Função de login
-  const login = (token, permissions, name) => {
-    
+  const login = (token, permissions, name, id) => {
     localStorage.setItem('token', token);
     localStorage.setItem('permissions', permissions);
     localStorage.setItem('username', name); // Armazena o nome do usuário
-    console.log("Username no localStorage:", name); 
+    localStorage.setItem('userId', id); // Armazena o ID do usuário
     isLoggedIn.value = true;
     userPermission.value = permissions;
     username.value = name;
+    userId.value = id;  // Define o userId
+    favoriteStore.loadFavorites(id);  // Carrega os favoritos para o usuário
   };
 
   // Função de logout
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('permissions');
-    localStorage.removeItem('username'); // Remove o nome do usuário
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');  // Remove o userId
     isLoggedIn.value = false;
     userPermission.value = null;
-    username.value = ''; // Limpa o nome do usuário
+    username.value = '';
+    userId.value = null;  // Limpa o userId
+    favoriteStore.clearFavorites();  // Limpa os favoritos do usuário
   };
 
-  return { isLoggedIn, userPermission, username, login, logout, checkAuthStatus };
+  return { isLoggedIn, userPermission, username, userId, login, logout, checkAuthStatus };
 });

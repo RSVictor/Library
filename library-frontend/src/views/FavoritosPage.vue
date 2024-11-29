@@ -8,17 +8,19 @@
       <span>Sua lista de favoritos</span>
     </div>
 
-    <div v-if="favorites.length" class="fav-item mt-3">
+    <!-- Exibe a lista de favoritos somente se o usuário estiver logado -->
+    <div v-if="isLoggedIn && favorites.length" class="fav-item mt-3">
       <span>Você tem {{ favorites.length }} item(s) na sua lista de favoritos.</span>
     </div>
 
-    <div class="mt-5" v-else>
-      <span>Você não tem favoritos ainda.</span>
+    <!-- Exibe mensagem quando o usuário não tem favoritos ou não está logado -->
+    <div v-else>
+      <span v-if="isLoggedIn">Você não tem favoritos ainda.</span>
+      <span v-else>Você precisa estar logado para ver seus favoritos.</span>
     </div>
 
     <div class="row flex-wrap" style="gap: 10px;">
       <div class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 card-fav mt-3"  v-for="book in favorites" :key="book._id">
-        
         <router-link :to="{ name: 'descricao', params: { id: book._id } }">
           <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
         </router-link>
@@ -51,16 +53,18 @@
 <script>
 import { useAuthStore } from '../stores/authStore'; // Ajuste o caminho se necessário
 import { useFavoriteStore } from '../stores/favoriteStore'; // Importe a store de favoritos
-import { ref, computed, onMounted } from 'vue';  // Importe ref, computed e onMounted
+import { computed, onMounted, watch } from 'vue';  // Importe ref, computed, onMounted, e watch
 
 export default {
   setup() {
     const authStore = useAuthStore();  // Store de autenticação
     const favoriteStore = useFavoriteStore();  // Store de favoritos
-    
 
-    // Recupera os favoritos da store
-    const favorites = computed(() => favoriteStore.favorites);  // A store de favoritos deve ter essa propriedade
+    // Verifica se o usuário está logado
+    const isLoggedIn = computed(() => authStore.isLoggedIn); 
+
+    // Recupera os favoritos da store, mas só se o usuário estiver logado
+    const favorites = computed(() => isLoggedIn.value ? favoriteStore.favorites : []);
 
     // Recupera o nome do usuário logado
     const username = computed(() => authStore.user?.username || 'Visitante');
@@ -68,22 +72,38 @@ export default {
     // Função para remover o livro dos favoritos
     const removeFromFavorites = (book) => {
       favoriteStore.removeFromFavorites(book);
-    }
+    };
 
     // Função para formatar o caminho da imagem
     const formatImagePath = (path) => {
       return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
-    }
+    };
+
+    // Ao deslogar, limpar favoritos
+    const logout = () => {
+      authStore.logout(); // Chame a função de logout da store de autenticação
+      favoriteStore.clearFavorites();  // Limpa favoritos ao deslogar
+    };
+
+    // Observa mudanças no login/logout e limpa os favoritos
+    watch(isLoggedIn, (newValue) => {
+      if (!newValue) {
+        favoriteStore.clearFavorites(); // Limpa os favoritos caso o usuário deslogue
+      }
+    });
 
     return {
       favorites,  // Lista de favoritos reativa
       username,   // Nome do usuário logado
-      removeFromFavorites,  // Função para remover do favoritos
-      formatImagePath  // Função para formatar o caminho da imagem
+      removeFromFavorites,  // Função para remover dos favoritos
+      formatImagePath,  // Função para formatar o caminho da imagem
+      isLoggedIn,  // Verificação do login
+      logout,  // Função de logout
     };
   }
 };
 </script>
+
 
 <style scoped>
 /* Adicione estilos adicionais conforme necessário */

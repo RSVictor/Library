@@ -88,89 +88,102 @@
   </div>
 </template>
 
+
 <script>
+// Importa o módulo 'axios' para fazer requisições HTTP.
 import axios from 'axios';
+// Importa a store de autenticação para acessar o nome do usuário autenticado.
 import { useAuthStore } from '../stores/authStore'; // Certifique-se de que o caminho da store está correto
 
 export default {
+  // Definindo o estado do componente, com as variáveis que serão usadas para armazenar os dados do livro e possíveis erros.
   data() {
     return {
       book: {
-        code: '',
-        title: '',
-        author: '',
-        year: '',
-        gender: '',
-        amount: '',
-        description: '',
-        image: null,
-        username: '', // Defina a variável username para armazenar o nome de usuário
+        // Informações sobre o livro que serão preenchidas no formulário
+        code: '',         // Código ISBN
+        title: '',        // Título do livro
+        author: '',       // Autor do livro
+        year: '',         // Ano de publicação
+        gender: '',       // Gênero do livro
+        amount: '',       // Quantidade disponível
+        description: '',  // Descrição do livro
+        image: null,      // Imagem (capa) do livro
+        username: '',     // Nome de usuário do usuário autenticado
       },
-      imagePreview: null, // Nova variável para armazenar a URL temporária da imagem
-      errors: {}, // Objeto para armazenar as mensagens de erro
+      imagePreview: null, // Variável que armazena a URL temporária para pré-visualizar a imagem antes de enviar
+      errors: {},        // Objeto para armazenar mensagens de erro de validação
     };
   },
+
+  // O 'mounted' é um hook que é executado assim que o componente é inserido no DOM.
   mounted() {
-    const authStore = useAuthStore(); // Acessa a store de autenticação
-    this.username = authStore.username; // Armazena o nome do usuário na variável 'username'
-    this.fetchBookData();
+    // Acessa a store de autenticação para pegar o nome de usuário
+    const authStore = useAuthStore(); 
+    this.username = authStore.username; // Armazena o nome do usuário no estado
+    this.fetchBookData(); // Chama a função para carregar os dados do livro
   },
+
   methods: {
-    // Função para buscar os dados do livro e exibir os dados na página
+    // Função assíncrona para buscar os dados do livro do servidor
     async fetchBookData() {
-      const bookId = this.$route.params.id;
-      console.log('ID do livro:', bookId);
+      const bookId = this.$route.params.id; // Recupera o ID do livro da URL
+      console.log('ID do livro:', bookId); // Para depuração
 
       try {
+        // Faz uma requisição GET para buscar os dados do livro no servidor
         const response = await axios.get(`http://localhost:3000/api/books/${bookId}`);
-        console.log('Dados do livro:', response.data);
+        console.log('Dados do livro:', response.data); // Exibe os dados do livro para depuração
 
         if (response.data) {
+          // Se a resposta contiver dados, preenche o estado 'book' com esses dados
           this.book = response.data;
 
-          // Se houver uma imagem, cria a URL de pré-visualização
+          // Se o livro tiver uma imagem, cria a URL para a pré-visualização da imagem
           if (this.book.image) {
             this.imagePreview = this.formatImagePath(this.book.image);
           }
         } else {
+          // Se o livro não for encontrado, exibe um alerta
           alert('Livro não encontrado.');
         }
       } catch (error) {
+        // Se ocorrer um erro durante a requisição, exibe o erro no console e um alerta
         console.error('Erro ao buscar dados do livro:', error);
         alert('Erro ao carregar os dados do livro');
       }
     },
 
-    // Função para formatar o caminho da imagem
+    // Função que formata o caminho da imagem, verificando se a URL é completa ou relativa
     formatImagePath(path) {
       if (path) {
-        // Verificar se o caminho da imagem já está completo
+        // Se o caminho já for uma URL completa (começar com 'http')
         if (path.startsWith('http')) {
-          return path; // Se já for uma URL completa, retorna como está
+          return path; // Retorna o caminho como está
         } else {
-          // Caso contrário, construa o caminho absoluto
+          // Caso contrário, cria uma URL absoluta para a imagem
           return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
         }
       }
       return ''; // Retorna uma string vazia caso não haja imagem
     },
 
-    // Função para atualizar a imagem ao selecionar um arquivo
+    // Função chamada quando o usuário seleciona um novo arquivo de imagem
     handleFileUpload(event) {
-      const file = event.target.files[0];
+      const file = event.target.files[0]; // Obtém o arquivo selecionado
       if (file) {
-        this.book.image = file;
-        // Cria a URL temporária para a pré-visualização
+        this.book.image = file; // Atribui o arquivo à propriedade 'image' do livro
+        // Cria uma URL temporária para pré-visualizar a imagem antes do envio
         this.imagePreview = URL.createObjectURL(file);
       }
     },
 
-    // Função para validar os campos
+    // Função para validar os campos do formulário
     validateForm() {
-      this.errors = {}; // Limpar erros anteriores
-      let valid = true;
+      this.errors = {}; // Limpa qualquer erro anterior
+      let valid = true; // Flag para verificar se o formulário é válido
 
-      // Verificar se cada campo está vazio e adicionar erro se necessário
+      // Validação de cada campo do livro, se o campo estiver vazio, adiciona uma mensagem de erro
       if (!this.book.code) {
         this.errors.code = 'Código ISBN é obrigatório.';
         valid = false;
@@ -200,16 +213,17 @@ export default {
         valid = false;
       }
 
-      return valid;
+      return valid; // Retorna se o formulário é válido ou não
     },
 
-    // Função para enviar o formulário e atualizar os dados do livro
+    // Função chamada quando o formulário é enviado
     async enviarFormulario() {
-      // Validar os campos antes de enviar o formulário
+      // Verifica se o formulário é válido antes de enviar
       if (!this.validateForm()) {
-        return; // Se o formulário não for válido, não envia
+        return; // Se não for válido, não envia
       }
 
+      // Cria um FormData para enviar os dados do livro (incluindo a imagem, se houver)
       const formData = new FormData();
       formData.append('code', this.book.code);
       formData.append('title', this.book.title);
@@ -219,22 +233,24 @@ export default {
       formData.append('amount', this.book.amount);
       formData.append('description', this.book.description);
 
+      // Se houver uma imagem, adiciona ao FormData
       if (this.book.image) {
         formData.append('image', this.book.image);
       }
 
       try {
-        // Enviar dados para o servidor (atualizar livro)
+        // Envia os dados para o servidor (PUT) para atualizar o livro
         const response = await axios.put(`http://localhost:3000/api/books/${this.book._id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
 
-        console.log('Livro atualizado:', response.data);
-        alert('Livro atualizado com sucesso!');
+        console.log('Livro atualizado:', response.data); // Exibe os dados do livro atualizado
+        alert('Livro atualizado com sucesso!'); // Exibe um alerta informando que o livro foi atualizado
 
-        // Após sucesso, redireciona para a página de listagem
+        // Após o sucesso, redireciona para a página de listagem de livros
         this.$router.push('/listalivro');
       } catch (error) {
+        // Se ocorrer um erro durante a requisição, exibe o erro no console e um alerta
         console.error('Erro ao atualizar livro:', error);
         alert('Erro ao atualizar o livro.');
       }

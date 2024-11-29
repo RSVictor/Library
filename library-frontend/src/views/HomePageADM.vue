@@ -1,11 +1,16 @@
 <template>
   <div class="container">
+    <!-- Exibe a saudação para o usuário logado -->
     <div class="user">
-      <p>Bem-vindo, {{ username }}! </p>
+      <p>Bem-vindo, {{ username }}! </p> <!-- Exibe o nome do usuário logado -->
     </div>
+    
+    <!-- Seção de Editoras -->
     <div class="row mt-3">
       <span>Editoras</span>
+      <!-- Listagem das editoras representadas por círculos -->
       <div class="mt-3 mb-5 row circulos">
+        <!-- Cada div com a classe "circle" representa uma editora -->
         <div class="circle" style="background-color: #93BFA7;">
           <span>Galáxia dos Livros</span>
         </div>
@@ -25,129 +30,134 @@
           <span>Galáxia dos Livros</span>
         </div>
       </div>
-     
-
+      
+      <!-- Seção de Livros -->
       <span>Livros</span>
       <div class="row flex-wrap">
-        <!-- Cada livro estará em linha -->
+        <!-- Exibe cada livro em um card com base na lista paginada -->
         <div class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 mb-3" v-for="book in paginatedBooks" :key="book._id">
-          
           <div class="card">
+            <!-- Redireciona para a página de descrição do livro -->
             <router-link :to="{ name: 'descricaoADM', params: { id: book._id } }">
               <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
             </router-link>
 
             <div class="card-body">
+              <!-- Exibe o título do livro -->
               <h5 class="card-title">{{ book.title }}</h5>
-            
             </div>
           </div>
         </div>
       </div>
-        <!-- Botões de navegação -->
+      
+      <!-- Navegação de páginas -->
       <div class="pagination">
-      <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
-      <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
-    </div>
+        <!-- Botão para ir para a página anterior -->
+        <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
+        <!-- Exibe a página atual e total de páginas -->
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+        <!-- Botão para ir para a página seguinte -->
+        <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
+      </div>
     </div>
   </div>
- 
-  
-  
 </template>
 
+
 <script>
-import { useAuthStore } from '../stores/authStore'; // ajuste o caminho se necessário
-import { useFavoriteStore } from '../stores/favoriteStore'; // Importe a store de favoritos
-import { useRouter } from 'vue-router';
-import { booksService } from '@/services/api';
+import { useAuthStore } from '../stores/authStore'; // Acessa a store de autenticação
+import { useFavoriteStore } from '../stores/favoriteStore'; // Acessa a store de favoritos
+import { useRouter } from 'vue-router'; // Acessa o Vue Router para navegação
+import { booksService } from '@/services/api'; // Acessa o serviço de livros
 
 export default {
   data() {
     return {
-      books: [], // Lista completa de livros
-      searchQuery: this.$route.query.search || '', // Valor da pesquisa do parâmetro da URL
-      searchApplied: '', // Valor aplicado ao filtro após clicar em "Buscar"
-      currentPage: 1, // Página atual
-      booksPerPage: 12, // Quantidade de livros por página
+      books: [], // Lista de livros que será exibida
+      searchQuery: this.$route.query.search || '', // Armazena o termo de pesquisa vindo da URL
+      searchApplied: '', // Armazena o filtro aplicado após a busca
+      currentPage: 1, // Página atual (inicialmente 1)
+      booksPerPage: 12, // Número de livros a serem exibidos por página
     };
   },
   computed: {
-  // Calcula os livros para a página atual
-  paginatedBooks() {
-    const filteredBooks = this.books.filter((book) => 
-      book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    // Calcula os livros que serão exibidos para a página atual
+    paginatedBooks() {
+      // Filtra os livros pelo título (conforme o termo de busca)
+      const filteredBooks = this.books.filter((book) => 
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
 
-    const start = (this.currentPage - 1) * this.booksPerPage;
-    const end = start + this.booksPerPage;
+      // Determina o índice de início e fim dos livros a serem exibidos
+      const start = (this.currentPage - 1) * this.booksPerPage;
+      const end = start + this.booksPerPage;
 
-    return filteredBooks.slice(start, end);
-  },paginatedBooks() {
-  const filteredBooks = this.books.filter((book) => 
-    book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-  );
-
-  const start = (this.currentPage - 1) * this.booksPerPage;
-  const end = start + this.booksPerPage;
-
-  return filteredBooks.slice(start, end); // Retorna os livros filtrados e paginados
-},
-  // Calcula o total de páginas
-  totalPages() {
-  const filteredBooks = this.books.filter((book) => 
-    book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-  );
-  return Math.ceil(filteredBooks.length / this.booksPerPage); // Retorna o número total de páginas
-},
+      // Retorna os livros filtrados e paginados
+      return filteredBooks.slice(start, end);
+    },
+    
+    // Calcula o número total de páginas com base nos livros filtrados
+    totalPages() {
+      const filteredBooks = this.books.filter((book) => 
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      return Math.ceil(filteredBooks.length / this.booksPerPage); // Total de páginas
+    },
   },
-
+  
   setup() {
-    const authStore = useAuthStore();
-    const favoriteStore = useFavoriteStore(); // Usar store de favoritos
-    const router = useRouter();
-   
+    // Configura as stores e o router
+    const authStore = useAuthStore();  // Store de autenticação
+    const favoriteStore = useFavoriteStore();  // Store de favoritos
+    const router = useRouter();  // Router para navegação
   },
-    
-
-    
+  
   methods: {
+    // Função para buscar livros da API com base no filtro de pesquisa
     fetchBooks() {
-    // Se houver um termo de pesquisa, passe como parâmetro na consulta
-    const queryParams = this.searchQuery ? { search: this.searchQuery } : {};
+      // Parâmetros de consulta com base no termo de pesquisa
+      const queryParams = this.searchQuery ? { search: this.searchQuery } : {};
 
-    booksService.getBooks(queryParams).then(response => {
-      this.books = response.data; // Assume que a API retorna um array de livros
-      console.log(this.books);      // Verifique os dados recebidos
-    }).catch(error => {
-      console.error("Erro ao buscar livros:", error);
-    });
-  },
+      booksService.getBooks(queryParams).then(response => {
+        this.books = response.data; // Armazena os livros retornados pela API
+        console.log(this.books);      // Log dos dados recebidos (útil para debug)
+      }).catch(error => {
+        console.error("Erro ao buscar livros:", error);  // Tratamento de erro
+      });
+    },
+
+    // Aplica o filtro de pesquisa
     applyFilter() {
-      this.searchApplied = this.searchQuery;
+      this.searchApplied = this.searchQuery;  // Atualiza o valor aplicado
     },
+
+    // Função para formatar o caminho da imagem (ajusta o caminho relativo)
     formatImagePath(path) {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`; // Retorna a URL da imagem
     },
+
+    // Função para ir para a próxima página de livros
     goToNextPage() {
-  if (this.currentPage < this.totalPages) {
-    this.currentPage++;
-  }
-},
-goToPreviousPage() {
-  if (this.currentPage > 1) {
-    this.currentPage--;
-  }
-}
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++; // Incrementa a página atual
+      }
+    },
+
+    // Função para ir para a página anterior
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--; // Decrementa a página atual
+      }
+    }
   },
+
+  // Função chamada quando o componente é montado
   mounted() {
-    // Obtém o nome do usuário da store
     const authStore = useAuthStore();
-    this.username = authStore.username; // Armazena o nome do usuário
-    this.fetchBooks();
+    this.username = authStore.username; // Obtém o nome do usuário da store
+    this.fetchBooks(); // Busca os livros na API
     if (this.searchQuery) {
-      this.applyFilter();
+      this.applyFilter(); // Aplica o filtro se houver um termo de pesquisa
     }
   }
 };

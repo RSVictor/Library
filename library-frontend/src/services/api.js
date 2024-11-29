@@ -62,15 +62,22 @@ export const booksService = {
     },
 };
 
+
+
 // Exporta funções relacionadas ao usuário/login
 export const userService = {
     login(credentials) {
         return apiClient.post('/auth/login', credentials); // Realiza login
     },
     async getProfile() {
-        const response = await apiClient.get('/profile');
-        return response.data;
-    },
+        try {
+          const response = await apiClient.get('/profile'); // Realiza a requisição GET para /profile
+          return response.data; // Retorna os dados do usuário obtidos
+        } catch (error) {
+          console.error('Erro ao obter dados do perfil:', error);
+          throw error; // Lança o erro para que o componente possa tratá-lo
+        }
+      },
     register(userData) {
         return apiClient.post('/auth/register', userData); // Registra um novo usuário
     },

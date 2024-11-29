@@ -1,10 +1,13 @@
 <template>
   <div class="container">
+    <!-- Exibe uma mensagem de boas-vindas se o usuário estiver logado -->
     <div class="user" v-if="isLoggedIn">
       <p>Bem-vindo, {{ username }}</p>
     </div>
+
     <div class="row mt-3">
       <span>Editoras</span>
+      <!-- Circulares para mostrar as editoras -->
       <div class="mt-3 mb-5 row circulos">
         <div class="circle" style="background-color: #93BFA7;">
           <span>Galáxia dos Livros</span>
@@ -26,13 +29,18 @@
         </div>
       </div>
 
+      <!-- Exibição dos detalhes do livro -->
       <div class="container desc p-4 mt-3">
         <div class="card" style="width: 15rem; min-height: 300px;">
+          <!-- Imagem do livro (se disponível) -->
           <img v-if="book && book.image" :src="formatImagePath(book.image)" class="card-img-top" alt="Imagem do Livro" style="width: 100%; height: 100%;" />
           <p v-else>Imagem não disponível</p>
+          
+          <!-- Botão para emprestar o livro -->
           <button class="btn btn-primary mt-3" style="background-color: #335844; border: none; margin-top: 10px;" @click="handleEmprestar">Emprestar</button>
         </div>
 
+        <!-- Descrição do livro -->
         <div class="descricao p-8">
           <div>
             <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Descrição</h3>
@@ -44,6 +52,7 @@
         </div>
       </div>
 
+      <!-- Detalhes do livro -->
       <div class="titulo">Descrição do livro</div>
       <div class="detalhes">
         <ul class="list-group mt-3">
@@ -71,32 +80,37 @@
         </ul>
       </div>
 
+      <!-- Formulário para deixar uma avaliação -->
       <div v-if="isLoggedIn" class="avaliacao-form mt-4">
         <h4>Deixe sua Avaliação</h4>
         <textarea v-model="newReview.text" class="form-control" rows="3" placeholder="Digite sua avaliação"></textarea>
         <div class="mt-2">
           <label for="rating">Nota:</label>
-           <select v-model="newReview.rating" class="form-select" id="rating">
-          <option value="" disabled>Selecione</option>
-          <option v-for="n in 5" :key="n" :value="n">{{ n }} estrela(s)</option>
-        </select>
+          <select v-model="newReview.rating" class="form-select" id="rating">
+            <option value="" disabled>Selecione</option>
+            <option v-for="n in 5" :key="n" :value="n">{{ n }} estrela(s)</option>
+          </select>
         </div>
         <button class="btn btn-success mt-3" @click="submitReview">Enviar Avaliação</button>
       </div>
+
+      <!-- Caso o usuário não esteja logado -->
       <div v-else class="mt-4">
         <p>Faça login para deixar sua avaliação.</p>
       </div>
 
+      <!-- Exibição das avaliações -->
       <div class="titulo">Avaliações</div>
       <div v-for="(review, index) in reviews" :key="index" class="avaliacoes mt-3">
         <div class="pessoa">
-          <p>{{ review.user }}</p>
+          <p>{{ review.user }}</p> <!-- Nome do usuário que avaliou -->
         </div>
         <div class="comentario">
-          <p>{{ review.text }}</p>
+          <p>{{ review.text }}</p> <!-- Texto da avaliação -->
         </div>
         <div>
           <p>
+            <!-- Exibe estrelas de acordo com a nota da avaliação -->
             <i v-for="n in 5" :key="n" :class="n <= parseInt(review.rating) ? 'bi bi-star like' : 'bi bi-star'"></i>
           </p>
         </div>
@@ -106,22 +120,23 @@
 </template>
 
 <script>
-import { booksService } from '@/services/api';
-import { useAuthStore } from '../stores/authStore';
-import { useRouter } from 'vue-router';
-import { ref, onMounted } from 'vue'; // Importando ref e onMounted
+import { booksService } from '@/services/api'; // Importa o serviço de livros
+import { useAuthStore } from '../stores/authStore'; // Importa a store de autenticação
+import { useRouter, useRoute } from 'vue-router'; // Importa o roteador para navegação
+import { ref, onMounted } from 'vue'; // Importa ref e onMounted para reatividade e ciclo de vida
 
 export default {
-  setup(props) {
+  setup() {
     const authStore = useAuthStore();
     const router = useRouter();
+    const route = useRoute();  // Para acessar os parâmetros da URL
 
-    // Definindo as variáveis reativas dentro do setup
-    const username = ref(authStore.username); // Obtém o nome do usuário da store
-    const isLoggedIn = ref(authStore.isLoggedIn); // Checa se o usuário está logado
+    // Definindo as variáveis reativas
+    const username = ref(authStore.username); // Nome do usuário logado
+    const isLoggedIn = ref(authStore.isLoggedIn); // Verifica se o usuário está logado
     const book = ref(null); // Dados do livro
     const reviews = ref([]); // Lista de avaliações
-    const newReview = ref({ text: '', rating: '' }); // Avaliação atual
+    const newReview = ref({ text: '', rating: '' }); // Avaliação que está sendo criada
 
     // Função para "emprestar" o livro
     const handleEmprestar = () => {
@@ -135,10 +150,11 @@ export default {
 
     // Função para buscar o livro por ID
     const fetchBook = async () => {
+      const id = route.params.id; // Obtendo o id da URL
       try {
-        const data = await booksService.fetchBookById(props.id);
+        const data = await booksService.fetchBookById(id);
         book.value = data;
-        reviews.value = data.reviews || []; // Atribuindo as avaliações do livro
+        reviews.value = data.reviews || []; // Atribuindo as avaliações
       } catch (error) {
         console.error('Erro ao buscar dados do livro:', error);
       }
@@ -146,7 +162,7 @@ export default {
 
     // Função para formatar o caminho da imagem
     const formatImagePath = (path) => {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+      return `http://localhost:3000/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
     };
 
     // Função para enviar avaliação
@@ -169,7 +185,7 @@ export default {
         rating: ratingValue,
       };
 
-      booksService.addReview(props.id, review)
+      booksService.addReview(book.value.id, review)
         .then(() => {
           fetchBook(); // Recarregar as avaliações
           newReview.value = { text: '', rating: '' }; // Limpar o formulário de avaliação
@@ -196,13 +212,6 @@ export default {
       formatImagePath,
       submitReview,
     };
-  },
-
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
   },
 };
 </script>

@@ -1,20 +1,28 @@
 <template>
+  <!-- Container principal da página -->
   <div class="container">
+    
+    <!-- Exibe o nome do usuário logado -->
     <div class="user">
-      <p>Bem-vindo, {{ username }}! </p>
+      <p>Bem-vindo, {{ username }}! </p> <!-- Exibe o nome do usuário -->
     </div>
 
+    <!-- Seção com os botões de navegação para o administrador -->
     <div class="titulo-adm-button ">
       <div class="button-adm">
+        <!-- Link para o Dashboard -->
         <RouterLink to="/dashboard">Dashboard</RouterLink>
       </div>
-      
       <div class="button-adm">
+        <!-- Link para a lista de usuários -->
         <RouterLink to="/listaUser">Usuários</RouterLink>
       </div>
       <div class="button-adm">
+        <!-- Link para adicionar novos livros -->
         <RouterLink to="/adicionarLivro">Adicionar Livros</RouterLink>
       </div>
+
+      <!-- Caixa de pesquisa para filtrar livros -->
       <div class="input-adm">
         <input 
           type="text" 
@@ -27,6 +35,7 @@
       </div>
     </div>
 
+    <!-- Título das colunas da lista de livros -->
     <div class="titulo-adm mt-5">
       <div class="text-emp">Id</div>
       <div class="text-emp">Título</div>
@@ -36,6 +45,7 @@
       <div class="text-emp">Opções</div>
     </div>
 
+    <!-- Exibe cada livro filtrado -->
     <div v-for="book in filteredBooks" :key="book._id" class="lista-adm mt-2">
       <div class="text-lista">{{ book.customId }}</div>
       <div class="text-lista">{{ book.title }}</div>
@@ -43,46 +53,52 @@
       <div class="text-lista">{{ book.gender }}</div>
       <div class="text-lista">{{ book.amount }}</div>
       <div class="text-lista">
+        <!-- Botões para editar e excluir livros -->
         <div class="button-perfil">
           <div class="button-editar-adm">
             <RouterLink :to="`/editarLivro/${book._id}`" class="button-link">
-              <i class="bi bi-pencil-square"></i>
+              <i class="bi bi-pencil-square"></i> <!-- Ícone de edição -->
             </RouterLink>
           </div>
           <div class="button-excluir-adm">
             <RouterLink to="/listalivro" class="button-link" @click="deleteBook(book._id)">
-              <i class="bi bi-trash"></i>
+              <i class="bi bi-trash"></i> <!-- Ícone de exclusão -->
             </RouterLink>
           </div>
         </div>
       </div>
     </div>
-    <!-- Botões de navegação -->
-<div class="pagination">
-  <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
-  <span>{{ currentPage }} / {{ totalPages }}</span>
-  <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
-</div>
+
+    <!-- Navegação de páginas -->
+    <div class="pagination">
+      <!-- Botão para ir à página anterior -->
+      <button @click="goToPreviousPage" :disabled="currentPage === 1">Anterior</button>
+      <!-- Exibe a página atual e o total de páginas -->
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <!-- Botão para ir à próxima página -->
+      <button @click="goToNextPage" :disabled="currentPage === totalPages">Próximo</button>
+    </div>
 
   </div>
 </template>
 
+
 <script>
 import axios from 'axios';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/authStore'; // Importa a store de autenticação
 
 export default { 
   data() {
-       return {
+    return {
       username: '',        // Armazena o nome do usuário
-      books: [],             // Armazena todos os livros
-      searchQuery: '',       // Termo de pesquisa
-      currentPage: 1,        // Página atual
-      booksPerPage: 10,      // Número de livros por página
+      books: [],           // Armazena todos os livros
+      searchQuery: '',     // Termo de pesquisa
+      currentPage: 1,      // Página atual
+      booksPerPage: 10,    // Número de livros exibidos por página
     };
   },
   mounted() {
-    // Obtém o nome do usuário da store
+    // Obtém o nome do usuário da store de autenticação
     const authStore = useAuthStore();
     this.username = authStore.username; // Armazena o nome do usuário
 
@@ -92,12 +108,12 @@ export default {
   computed: {
     // Filtra os livros com base na pesquisa e aplica a paginação
     filteredBooks() {
-      // Filtra os livros com base na pesquisa
+      // Filtra os livros com base no título
       const filteredBooks = this.books.filter(book => {
         return book.title.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
 
-      // Aplica a paginação
+      // Aplica a lógica de paginação
       const start = (this.currentPage - 1) * this.booksPerPage;
       const end = start + this.booksPerPage;
 
@@ -109,7 +125,7 @@ export default {
       const filteredBooks = this.books.filter(book => {
         return book.title.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
-      return Math.ceil(filteredBooks.length / this.booksPerPage); // Número de páginas
+      return Math.ceil(filteredBooks.length / this.booksPerPage); // Retorna o total de páginas
     }
   },
 
@@ -117,14 +133,14 @@ export default {
     // Função para ir para a próxima página
     goToNextPage() {
       if (this.currentPage < this.totalPages) {
-        this.currentPage++;
+        this.currentPage++; // Incrementa a página
       }
     },
 
     // Função para ir para a página anterior
     goToPreviousPage() {
       if (this.currentPage > 1) {
-        this.currentPage--;
+        this.currentPage--; // Decrementa a página
       }
     },
 
@@ -132,9 +148,9 @@ export default {
     async fetchBooks() {
       try {
         const response = await axios.get('http://localhost:3000/api/books');
-        this.books = response.data;  // Armazena a lista de livros
+        this.books = response.data;  // Armazena os livros na variável 'books'
       } catch (error) {
-        console.error('Erro ao buscar livros:', error);
+        console.error('Erro ao buscar livros:', error);  // Em caso de erro na requisição
       }
     },
     
@@ -144,10 +160,10 @@ export default {
       if (confirmed) {
         try {
           await axios.delete(`http://localhost:3000/api/books/${id}`);
-          this.books = this.books.filter(book => book._id !== id); // Remove da lista local
-          alert('Livro excluído com sucesso!');
+          this.books = this.books.filter(book => book._id !== id); // Remove o livro da lista local
+          alert('Livro excluído com sucesso!'); // Exibe mensagem de sucesso
         } catch (error) {
-          console.error('Erro ao excluir livro:', error);
+          console.error('Erro ao excluir livro:', error); // Em caso de erro
           alert('Erro ao excluir o livro.');
         }
       }
@@ -155,7 +171,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .text-danger {
