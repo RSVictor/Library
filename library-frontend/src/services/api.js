@@ -81,6 +81,10 @@ export const userService = {
     register(userData) {
         return apiClient.post('/auth/register', userData); // Registra um novo usuário
     },
+    getProfileById(userId) {
+        return apiClient.get(`/users/${userId}`); // Obtém perfil do usuário por ID
+    },
+    
 };
 
 // Exporta os clientes de API para uso em outros módulos

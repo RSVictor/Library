@@ -83,6 +83,9 @@ export default {
     const currentPage = ref(1);
     const booksPerPage = 12;
 
+    const userId = localStorage.getItem("userId");
+    console.log('AQUIIIIIIIIIIIIIIIIIII:', userId)
+
     // Ao logar, carregar favoritos do usuário
     if (authStore.isLoggedIn && authStore.user) {
       favoriteStore.loadFavorites(authStore.user.id);

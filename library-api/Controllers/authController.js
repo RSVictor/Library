@@ -49,6 +49,8 @@ exports.login = async (req, res) => {
             token,
             permissions: user.permissions,
             username: user.username,  
+            userId: user._id // Adiciona o ID do usuário na resposta
+
         });
     } catch (error) {
         console.error(error); // Loga o erro

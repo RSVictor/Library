@@ -14,13 +14,14 @@ export const useAuthStore = defineStore('auth', () => {
   const checkAuthStatus = () => {
     const token = localStorage.getItem('token');
     const permissions = localStorage.getItem('permissions');
-    const id = localStorage.getItem('userId');  // Recupere o userId do localStorage
+    const storedUserId = localStorage.getItem('userId');  // Recupere o userId do localStorage
     
-    if (token && permissions && id) {
+    // Corrigido para verificar 'storedUserId' corretamente
+    if (token && permissions && storedUserId) {
       isLoggedIn.value = true;
       userPermission.value = permissions;
       username.value = localStorage.getItem('username') || '';
-      userId.value = id;  // Define o userId
+      userId.value = storedUserId;  // Define o userId a partir do localStorage
     } else {
       isLoggedIn.value = false;
       userPermission.value = null;
@@ -39,6 +40,8 @@ export const useAuthStore = defineStore('auth', () => {
     userPermission.value = permissions;
     username.value = name;
     userId.value = id;  // Define o userId
+
+    // Carrega os favoritos
     favoriteStore.loadFavorites(id);  // Carrega os favoritos para o usuário
   };
 

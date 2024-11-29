@@ -71,9 +71,9 @@ export default {
 
         // Acessa a store de autenticação
         const authStore = useAuthStore();
+        const { token, permissions, username, userId } = response.data;
         // Chama o método 'login' da store para armazenar o token, permissões e nome de usuário
-        authStore.login(response.data.token, response.data.permissions, response.data.username);
-
+        authStore.login(token, permissions, username, userId);
         // Redireciona com base nas permissões do usuário
         if (response.data.permissions === 'Usuario') {
           // Redireciona para a página do usuário

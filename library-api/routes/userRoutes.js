@@ -15,10 +15,10 @@ router.get('/', async (req, res) => {
 });
 
 // Rota para obter um usuário específico pelo ID
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
+router.get('/:userId', async (req, res) => {
+    const { userId } = req.params;
     try {
-        const user = await User.findById(id);  // Busca o usuário pelo ID
+        const user = await User.findById(userId);  // Busca o usuário pelo ID
         if (!user) {
             return res.status(404).json({ message: 'Usuário não encontrado' });
         }

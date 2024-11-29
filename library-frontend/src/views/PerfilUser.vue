@@ -95,14 +95,16 @@ export default {
     },
 
     // Método para buscar os dados do usuário após o login ou montagem do componente
+    // Método para buscar os dados do usuário após o login ou montagem do componente
     async fetchUserData() {
       try {
-        // Chama a API para obter os dados do usuário
-        const response = await userService.getProfile(); // Chama a função correta no serviço
+        const userId = localStorage.getItem("userId");  // Recupera o userId do localStorage        
+        const response = await axios.put(`http://localhost:3000/admin/api/users/${userId}`);
+
         // Atualiza as variáveis com os dados recebidos
-        this.username = response.username; // Supondo que a resposta seja um objeto direto
-        this.email = response.email;
-        this.userImage = response.imageUrl || ''; // Se existir uma URL de imagem, armazena
+        this.username = response.username;  // Atualiza o nome de usuário
+        this.email = response.email;  // Atualiza o email
+        this.userImage = response.imageUrl || '';  // Se existir uma URL de imagem, armazena
         if (this.userImage) {
           // Se a imagem for encontrada, exibe na tela
           this.imagePreview = this.userImage;
