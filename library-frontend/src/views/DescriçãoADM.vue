@@ -15,7 +15,7 @@
         <div class="descricao p-8">
           <div>
             <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Descrição</h3>
-            <div style="background-color: #93BFA7;">
+            <div >
                <!-- Exibe a descrição do livro ou uma mensagem de carregamento -->
                <p v-if="book">{{ book.description }}</p>
                <p v-else>Carregando descrição...</p>
