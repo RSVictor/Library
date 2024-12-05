@@ -44,7 +44,7 @@
               <p v-if="errors.author" class="text-danger">{{ errors.author }}</p>
 
               <label for="floatingInput">Ano de publicação:</label>
-              <input type="number" class="form-control" v-model="book.year" />
+              <input type="text" class="form-control" v-model="book.year" />
               <p v-if="errors.year" class="text-danger">{{ errors.year }}</p>
 
               <label for="floatingInput">Gênero:</label>

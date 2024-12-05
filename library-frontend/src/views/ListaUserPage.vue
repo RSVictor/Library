@@ -46,7 +46,12 @@
 
     <!-- Exibe a lista de usuários com base na página atual e no filtro de pesquisa -->
     <div v-for="user in paginatedUsers" :key="user._id" class="lista-adm mt-2">
-      <div class="text-lista">{{ user.customId }}</div>
+      <div class="text-lista">
+        <!-- Exibe o ID curto e o ID completo no atributo title para mostrar ao passar o mouse -->
+        <span class="id-compacto" :title="user._id.toString()">
+          {{ user._id.toString().slice(0, 6) }}...{{ user._id.toString().slice(-6) }}
+        </span>
+      </div>
       <div class="text-lista">{{ user.username }}</div>
       <div class="text-lista">{{ user.email }}</div>
       <!-- Aplica a classe 'text-danger' se o status do usuário for 'inativo' -->
@@ -202,4 +207,23 @@ export default {
 .pagination button {
   margin: 0 10px;
 }
+
+/* Estilo para o ID compactado */
+.id-compacto {
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px; /* Ajuste conforme necessário */
+  padding: 2px 5px; 
+  border-radius: 4px;
+}
+
+/* Tooltip estilo padrão (aparece no hover) */
+.id-compacto:hover {
+  background-color: #d0d0d0;
+}
+
 </style>
+
