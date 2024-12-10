@@ -19,7 +19,7 @@ const upload = multer({ storage: storage }); // Corrigido para não usar .single
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173, https://library-8hbh.onrender.com',
+    origin: 'https://library-8hbh.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 

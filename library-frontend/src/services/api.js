@@ -1,8 +1,10 @@
 import axios from 'axios'; // Importa Axios para requisições HTTP
+// URL do seu backend no Render
+const apiUrl = 'https://library-8hbh.onrender.com';
 
 // Cria instância do Axios para gerenciamento de livros
 const booksApiClient = axios.create({
-    baseURL: 'http://localhost:3000/api/books', // API para livros
+    baseURL: '${apiUrl}/api/books', // API para livros
     headers: {
         'Content-Type': 'application/json',
     },
@@ -10,7 +12,7 @@ const booksApiClient = axios.create({
 
 // Cria instância do Axios para login e outras rotas gerais
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3000/api', // API para login/usuários
+    baseURL: '${apiUrl}/api', // API para login/usuários
     headers: {
         'Content-Type': 'application/json',
     },
