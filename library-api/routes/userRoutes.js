@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const user = require('../models/User');  // Modelo de usuário
+const user = require('../Models/User');  // Modelo de usuário
 const bcrypt = require('bcryptjs');  // Biblioteca para criptografia de senha
 
 // Rota para obter todos os usuários
