@@ -19,7 +19,7 @@ const upload = multer({ storage: storage }); // Corrigido para não usar .single
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173, https://library-8hbh.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
@@ -45,7 +45,7 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
