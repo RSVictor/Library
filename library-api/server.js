@@ -45,7 +45,7 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
